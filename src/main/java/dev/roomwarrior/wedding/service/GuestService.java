@@ -45,12 +45,12 @@ public class GuestService {
 
             if (AttendingEnum.YES.equals(attending)) {
                 attendingCount++;
-                needTransportCount += responseModel.getNeedTransport() ? 1 : 0;
+                needTransportCount += responseModel.getNeedTransport() != null && responseModel.getNeedTransport() ? 1 : 0;
                 categorizeGuest(guest, responseModel, friends, family, colleagues);
 
             } else if (AttendingEnum.PLUS_ONE.equals(attending)) {
                 attendingCount += 2;
-                needTransportCount += responseModel.getNeedTransport() ? 2 : 0;
+                needTransportCount += responseModel.getNeedTransport() != null && responseModel.getNeedTransport() ? 2 : 0;
                 categorizeGuest(guest, responseModel, friends, family, colleagues);
 
             } else {

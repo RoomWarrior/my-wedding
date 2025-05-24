@@ -1,17 +1,14 @@
 package dev.roomwarrior.wedding.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import dev.roomwarrior.wedding.enums.AttendingEnum;
 import dev.roomwarrior.wedding.enums.RelationType;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -32,6 +29,13 @@ public class Guest {
     
     @Enumerated(EnumType.STRING)
     private RelationType relationType;
+
+    private LocalDateTime cts;
+
+    @PrePersist
+    public void prePersist() {
+        cts = LocalDateTime.now();
+    }
 
     public GuestDto toDto() {
         return GuestDto.builder()

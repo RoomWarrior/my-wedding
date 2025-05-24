@@ -375,11 +375,17 @@
     </div>
 
     <div class="container">
-        <div class="rsvp-form">
+        <div class="rsvp-form" id="rsvpFormContainer">
             <h2 class="text-center mb-4">RSVP</h2>
             <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
                 Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div id="loadingIndicator" class="text-center mb-3" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>
+                <p class="mt-2">Отправка формы...</p>
             </div>
             <form th:action="@{/rsvp}" th:object="${guest}" method="post" id="rsvpForm">
                 <div class="mb-4">
@@ -485,6 +491,71 @@
             }
         }
 
+        // Валидация формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (attendingPlusOne.checked && !plusOneNameInput.value.trim()) {
+                alert('Пожалуйста, укажите имя +1');
+                return;
+            }
+
+            const isAttending = attendingYes.checked || attendingPlusOne.checked;
+            if (isAttending && !document.querySelector('input[name="needsTransport"]:checked')) {
+                alert('Пожалуйста, выберите способ транспорта');
+                return;
+            }
+
+            // Показываем индикатор загрузки
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            loadingIndicator.style.display = 'block';
+            submitButton.disabled = true;
+
+            // Собираем данные формы
+            const formData = new FormData(form);
+
+            // Отправляем форму через AJAX
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Отключаем все поля формы
+                    const formElements = form.elements;
+                    for (let i = 0; i < formElements.length; i++) {
+                        formElements[i].disabled = true;
+                    }
+
+                    // Создаем и показываем сообщение об успехе
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                    alertDiv.role = 'alert';
+                    alertDiv.innerHTML = `
+                        Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    `;
+                    form.insertBefore(alertDiv, form.firstChild);
+
+                    // Скрываем индикатор загрузки
+                    loadingIndicator.style.display = 'none';
+
+                    // Автоматически скрываем сообщение через 10 секунд
+                    setTimeout(() => {
+                        const bsAlert = new bootstrap.Alert(alertDiv);
+                        bsAlert.close();
+                    }, 10000);
+                } else {
+                    throw new Error('Ошибка при отправке формы');
+                }
+            })
+            .catch(error => {
+                alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
+                submitButton.disabled = false;
+                loadingIndicator.style.display = 'none';
+            });
+        });
+
         // Инициализация при загрузке страницы
         updateFormFields();
 
@@ -492,39 +563,6 @@
         document.querySelectorAll('input[name="attending"]').forEach(radio => {
             radio.addEventListener('change', updateFormFields);
         });
-
-        // Валидация формы
-        form.addEventListener('submit', function(e) {
-            if (attendingPlusOne.checked && !plusOneNameInput.value.trim()) {
-                e.preventDefault();
-                alert('Пожалуйста, укажите имя +1');
-                return;
-            }
-
-            const isAttending = attendingYes.checked || attendingPlusOne.checked;
-            if (isAttending && !document.querySelector('input[name="needsTransport"]:checked')) {
-                e.preventDefault();
-                alert('Пожалуйста, выберите способ транспорта');
-                return;
-            }
-        });
-
-        // Автоматическое скрытие уведомления через 10 секунд
-        const successAlert = document.querySelector('.alert-success');
-        if (successAlert) {
-            // Отключаем все поля формы
-            const formElements = form.elements;
-            for (let i = 0; i < formElements.length; i++) {
-                formElements[i].disabled = true;
-            }
-            submitButton.disabled = true;
-            submitButton.classList.add('disabled');
-
-            setTimeout(() => {
-                const bsAlert = new bootstrap.Alert(successAlert);
-                bsAlert.close();
-            }, 10000);
-        }
     </script>
 </body>
 </html> 
