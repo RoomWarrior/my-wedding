@@ -1,18 +1,17 @@
 package dev.roomwarrior.wedding.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import dev.roomwarrior.wedding.enums.AttendingEnum;
+import dev.roomwarrior.wedding.enums.RelationType;
 import dev.roomwarrior.wedding.model.Guest;
 import dev.roomwarrior.wedding.model.GuestDto;
 import dev.roomwarrior.wedding.model.GuestResponseModel;
 import dev.roomwarrior.wedding.model.GuestSummaryInfo;
 import dev.roomwarrior.wedding.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,16 +45,13 @@ public class GuestService {
             if (AttendingEnum.YES.equals(attending)) {
                 attendingCount++;
                 needTransportCount += responseModel.getNeedTransport() != null && responseModel.getNeedTransport() ? 1 : 0;
-                categorizeGuest(guest, responseModel, friends, family, colleagues);
-
             } else if (AttendingEnum.PLUS_ONE.equals(attending)) {
                 attendingCount += 2;
                 needTransportCount += responseModel.getNeedTransport() != null && responseModel.getNeedTransport() ? 2 : 0;
-                categorizeGuest(guest, responseModel, friends, family, colleagues);
-
             } else {
                 notAttending.add(responseModel);
             }
+            categorizeGuest(guest.getRelationType(), responseModel, friends, family, colleagues);
         }
 
         int totalGuests = attendingCount + notAttending.size();
@@ -72,11 +68,11 @@ public class GuestService {
                 .build();
     }
 
-    private void categorizeGuest(Guest guest, GuestResponseModel model,
+    private void categorizeGuest(RelationType relationType, GuestResponseModel model,
                                  List<GuestResponseModel> friends,
                                  List<GuestResponseModel> family,
                                  List<GuestResponseModel> colleagues) {
-        switch (guest.getRelationType()) {
+        switch (relationType) {
             case FRIEND:
                 friends.add(model);
                 break;
