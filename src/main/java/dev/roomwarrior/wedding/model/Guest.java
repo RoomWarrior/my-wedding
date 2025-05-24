@@ -43,4 +43,12 @@ public class Guest {
         .relationType(relationType)
         .build();
     }
+
+    public GuestResponseModel toResponseModel() {
+        return GuestResponseModel.builder()
+                .name(name)
+                .needTransport(needsTransport)
+                .plusOneName(plusOneName)
+                .build();
+    }
 } 
