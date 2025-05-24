@@ -40,3 +40,8 @@ logs/
 .env
 application-local.properties
 application-dev.properties
+
+### H2 Database ###
+*.mv.db
+*.trace.db
+*.db
