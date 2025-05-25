@@ -1,26 +1,25 @@
 package dev.roomwarrior.wedding.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.roomwarrior.wedding.enums.AttendingEnum;
+import dev.roomwarrior.wedding.model.Guest;
+import dev.roomwarrior.wedding.service.GuestService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.roomwarrior.wedding.enums.AttendingEnum;
-import dev.roomwarrior.wedding.model.GuestDto;
-import dev.roomwarrior.wedding.service.GuestService;
-
 @Controller
+@RequiredArgsConstructor
 public class WeddingController {
 
-    @Autowired
-    private GuestService guestService;
+    private final GuestService guestService;
 
     @GetMapping("/")
     public String home(Model model) {
         if (!model.containsAttribute("guest")) {
-            model.addAttribute("guest", GuestDto.builder()
+            model.addAttribute("guest", Guest.builder()
                     .attending(AttendingEnum.YES)
                     .build());
         }
@@ -28,10 +27,10 @@ public class WeddingController {
     }
 
     @PostMapping("/rsvp")
-    public String rsvp(GuestDto guestDto, RedirectAttributes redirectAttributes) {
-        guestService.saveGuest(guestDto);
+    public String rsvp(Guest guest, RedirectAttributes redirectAttributes) {
+        guestService.saveGuest(guest);
         redirectAttributes.addFlashAttribute("success", true);
-        redirectAttributes.addFlashAttribute("guest", guestDto);
+        redirectAttributes.addFlashAttribute("guest", guest);
         return "redirect:/";
     }
 }
