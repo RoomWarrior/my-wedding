@@ -76,7 +76,7 @@
         </div>
         <form th:action="@{/rsvp}" th:object="${guest}" method="post" id="rsvpForm">
             <div class="mb-4">
-                <label for="name" class="form-label">Ваше имя <span class="text-danger">*</span></label>
+                <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" th:field="*{name}" required>
             </div>
             <div class="mb-4">
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="mb-4" id="plusOneNameDiv" style="display: none;">
-                <label for="plusOneName" class="form-label">Имя +1 <span class="text-danger">*</span></label>
+                <label for="plusOneName" class="form-label">Имя и фамилия +1 <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
             </div>
             <div class="mb-4" id="transportDiv" style="display: none;">
