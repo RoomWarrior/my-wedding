@@ -8,13 +8,12 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Raleway&family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="wedding-header">
     <!--        <p>Приглашение на свадьбу</p>-->
     <h1>Артур & Карина</h1>
-
-
     <div class="wedding-details">
         <h2 class="lead">Дорогие друзья!</h2>
         <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни.</p>
@@ -25,24 +24,24 @@
         <h2 class="lead">Программа торжства</h2>
         <div class="timeline">
             <div class="timeline-item">
-                <img src="/images/img.png" alt="Церемония">
-                <div class="time">14:00</div>
+                <img src="/images/champagne.svg" alt="Церемония">
+                <div class="time">15:00</div>
                 <div class="event">Собор гостей, фуршет</div>
             </div>
             <div class="timeline-item">
-                <img src="/images/church.png" alt="Церемония">
-                <div class="time">15:00</div>
+                <img src="/images/arch.svg" alt="Церемония">
+                <div class="time">16:00</div>
                 <div class="event">Внездная регистрация</div>
             </div>
             <div class="timeline-item">
-                <img src="/images/glassies.png" alt="Банкет">
+                <img src="/images/cake.svg" alt="Банкет">
                 <div class="time">17:00</div>
                 <div class="event">Праздничный банкет</div>
             </div>
             <div class="timeline-item">
-                <img src="/images/music.png" alt="After party">
-                <div class="time">22:00</div>
-                <div class="event">After party</div>
+                <img src="/images/saxophone.svg" alt="After party">
+                <div class="time">18:00</div>
+                <div class="event">Музыка, танцы, веселье!</div>
             </div>
         </div>
     </div>
@@ -68,12 +67,18 @@
 </div>
 
 <div class="container">
+        <div id="thankYouModal" class="modal" th:if="${success}">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>
+            </div>
+        </div>
     <div class="rsvp-form" id="rsvpFormContainer">
         <h2 class="text-center mb-4">RSVP</h2>
-        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
-            Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<!--        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">-->
+<!--            Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!-->
+<!--            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
+<!--        </div>-->
         <div id="loadingIndicator" class="text-center mb-3" style="display: none;">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Загрузка...</span>
@@ -149,6 +154,9 @@
             </div>
             <button type="submit" class="btn btn-primary w-100" id="submitButton">Отправить</button>
         </form>
+    </div>
+    <div>
+
     </div>
 </div>
 
@@ -227,25 +235,33 @@
                     for (let i = 0; i < formElements.length; i++) {
                         formElements[i].disabled = true;
                     }
-
+                    // <div id="thankYouModal" class="modal" th:if="${success}">
+                    //     <div class="modal-content">
+                    //         <span class="close" onclick="closeModal()">&times;</span>
+                    //         <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>
+                    //     </div>
+                    // </div>
                     // Создаем и показываем сообщение об успехе
                     const alertDiv = document.createElement('div');
-                    alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                    alertDiv.className = 'modal';
+                    alertDiv.id = 'thankYouModal'
                     alertDiv.role = 'alert';
                     alertDiv.innerHTML = `
-                        Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    `;
+                   <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>
+                        </div>
+`;
                     form.insertBefore(alertDiv, form.firstChild);
 
                     // Скрываем индикатор загрузки
                     loadingIndicator.style.display = 'none';
 
                     // Автоматически скрываем сообщение через 10 секунд
-                    setTimeout(() => {
-                        const bsAlert = new bootstrap.Alert(alertDiv);
-                        bsAlert.close();
-                    }, 10000);
+                    // setTimeout(() => {
+                    //     const bsAlert = new bootstrap.Alert(alertDiv);
+                    //     bsAlert.close();
+                    // }, 10000);
                 } else {
                     throw new Error('Ошибка при отправке формы');
                 }
@@ -264,6 +280,9 @@
     document.querySelectorAll('input[name="attending"]').forEach(radio => {
         radio.addEventListener('change', updateFormFields);
     });
+    function closeModal() {
+        document.getElementById("thankYouModal").style.display = "none";
+    }
 </script>
 </body>
 </html> 
