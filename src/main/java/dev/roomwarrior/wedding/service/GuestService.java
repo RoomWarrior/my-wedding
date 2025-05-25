@@ -3,13 +3,13 @@ package dev.roomwarrior.wedding.service;
 import dev.roomwarrior.wedding.enums.AttendingEnum;
 import dev.roomwarrior.wedding.enums.RelationType;
 import dev.roomwarrior.wedding.model.Guest;
-import dev.roomwarrior.wedding.model.GuestDto;
 import dev.roomwarrior.wedding.model.GuestResponseModel;
 import dev.roomwarrior.wedding.model.GuestSummaryInfo;
-import dev.roomwarrior.wedding.repository.GuestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +17,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuestService {
 
-    private final GuestRepository guestRepository;
+    private final JsonFileService jsonFileService;
 
-    public GuestDto saveGuest(GuestDto guestDto) {
-        return guestRepository.save(guestDto.toEntity()).toDto();
+    public void saveGuest(Guest guest) {
+        List<Guest> guests = jsonFileService.loadData(Guest.class);
+        
+        if (guest.getId() == null) {
+            Long newId = guests.stream()
+                    .mapToLong(Guest::getId)
+                    .max()
+                    .orElse(0L) + 1;
+            guest.setId(newId);
+            guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        }
+        
+        guests.removeIf(g -> g.getId().equals(guest.getId()));
+        guests.add(guest);
+        
+        jsonFileService.saveData(guests);
     }
 
     public List<Guest> getAllGuests() {
-        return guestRepository.findAll();
+        return jsonFileService.loadData(Guest.class);
     }
 
     public GuestSummaryInfo guestSummaryInfo() {
-        List<Guest> guests = guestRepository.findAll();
+        List<Guest> guests = getAllGuests();
 
         List<GuestResponseModel> notAttending = new ArrayList<>();
         List<GuestResponseModel> friends = new ArrayList<>();
