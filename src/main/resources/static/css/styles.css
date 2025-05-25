@@ -47,13 +47,13 @@ body {
     margin-bottom: 1rem;
     font-weight: 500;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-    font-family: 'Brush Script MT', cursive;
+    font-family: "Marck Script", cursive;
     font-size: 3.5em;
     color: var(--mountain-blue);
 }
 
 .wedding-header .lead {
-    font-family: 'Brush Script MT', cursive;
+    font-family: "Marck Script", cursive;
     font-size: 2rem;
     color: var(--mountain-blue);
     font-weight: 500;
