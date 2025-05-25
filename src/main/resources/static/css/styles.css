@@ -1,15 +1,22 @@
 :root {
     /*--primary-color: #2C3E50;  !* Глубокий синий гор *!*/
     --accent-color: #eead91;   /* Теплый оранжевый заката */
-    --text-color: #712814;     /* Темно-red текст */
+    --text-color: #555555;     /* Темно-red текст */
     --light-bg: #f3e8dc;       /* Светлый фон */
     --nature-green: #445439;   /* Зеленый лес */
-    --soft-green: #9ead5c;     /* Светлый зеленый */
-    --mountain-blue: #4B251C;  /* Синий неба */
+    /*--soft-green: #9ead5c;     !* Светлый зеленый *!*/
+    --mountain-blue: #712814;  /* Синий неба */
     --rock-brown: #a46c57;     /* Серый скал */
     --sunset-orange: #cd5222;  /* Оранжевый заката */
     --light-bg-purple: #d4c0b9; /* Фиолетовый горных вершин */
 }
+
+/*<div class="color-swatch" style="background-color: var(--sunset-orange);"></div>*/
+/*<div class="color-swatch" style="background-color: var(--accent-color);"></div>*/
+/*<div class="color-swatch" style="background-color: var(--text-color);"></div>*/
+/*<div class="color-swatch" style="background-color: var(--rock-brown);"></div>*/
+/*<div class="color-swatch" style="background-color: var(--light-bg-purple);"></div>*/
+/*<div class="color-swatch" style="background-color: var(--nature-green);"></div>*/
 
 body {
     background-color: var(--light-bg);
@@ -53,7 +60,7 @@ body {
     font-family: 'Brush Script MT', cursive;
     font-size: 3.5em;
     /*margin-top: 10px;*/
-    color: var(--text-color);
+    color: var(--mountain-blue);
 }
 
 .wedding-header .lead {
@@ -78,14 +85,6 @@ body {
     border-radius: 15px;
     margin: 1.5rem auto;
     max-width: 600px;
-}
-
-.wedding-details h3 {
-    font-family: "Caveat", cursive;
-    color: var(--mountain-blue);
-    font-size: 1.3rem;
-    margin-block: 1rem;
-    font-weight: 500;
 }
 
 .wedding-details p {
@@ -130,12 +129,12 @@ body {
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(to right, var(--mountain-blue), var(--sunset-orange));
+    background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
 }
 
 .rsvp-form h2 {
     font-family: 'Playfair Display', serif;
-    color: var(--nature-green);
+    color: var(--mountain-blue);
     margin-bottom: 1.5rem;
     font-weight: 500;
     font-size: 1.8rem;
@@ -143,7 +142,7 @@ body {
 
 .form-label {
     font-weight: 500;
-    color: var(--nature-green);
+    color: var(--text-color);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
@@ -167,7 +166,7 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(to right, var(--mountain-blue), var(--sunset-orange));
+    background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
     border: none;
     padding: 15px;
     font-weight: 500;
