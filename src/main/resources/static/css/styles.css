@@ -13,10 +13,10 @@
 
 body {
     background-color: var(--light-bg);
-    font-family: 'Raleway', cursive;
+    font-family: 'Caveat', cursive;
     color: var(--text-color);
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 1.3rem;
 }
 
 .wedding-header {
@@ -48,7 +48,7 @@ body {
     font-weight: 500;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
     font-family: "Marck Script", cursive;
-    font-size: 3.5em;
+    font-size: 3.5rem;
     color: var(--mountain-blue);
 }
 
@@ -62,7 +62,7 @@ body {
 }
 
 .wedding-header p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-color);
     margin-bottom: 0.5rem;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
@@ -78,7 +78,7 @@ body {
 
 .wedding-details p {
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .wedding-details .highlight {
@@ -122,11 +122,11 @@ body {
 }
 
 .rsvp-form h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Marck Script', serif;
     color: var(--mountain-blue);
     margin-bottom: 1.5rem;
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .form-label {
@@ -230,7 +230,7 @@ textarea.form-control {
     }
 
     .wedding-header p {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .wedding-details {
@@ -243,7 +243,7 @@ textarea.form-control {
     }
 
     .wedding-details p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .rsvp-form {
@@ -284,7 +284,7 @@ textarea.form-control {
     }
 
     .wedding-header p {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .form-control {
