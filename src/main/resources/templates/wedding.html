@@ -12,7 +12,6 @@
 </head>
 <body>
 <div class="wedding-header">
-    <!--        <p>Приглашение на свадьбу</p>-->
     <h1>Артур & Карина</h1>
     <div class="wedding-details">
         <h2 class="lead">Дорогие друзья!</h2>
@@ -67,18 +66,8 @@
 </div>
 
 <div class="container">
-<!--        <div id="thankYouModal" class="modal" th:if="${success}">-->
-<!--            <div class="modal-content">-->
-<!--                <span class="close" onclick="closeModal()">&times;</span>-->
-<!--                <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>-->
-<!--            </div>-->
-<!--        </div>-->
     <div class="rsvp-form" id="rsvpFormContainer">
         <h2 class="text-center mb-4">RSVP</h2>
-<!--        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">-->
-<!--            Спасибо за ваш ответ! Мы будем рады видеть вас на нашей свадьбе!-->
-<!--            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
-<!--        </div>-->
         <div id="loadingIndicator" class="text-center mb-3" style="display: none;">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Загрузка...</span>
@@ -164,6 +153,7 @@
 <script>
     const attendingPlusOne = document.getElementById('attendingPlusOne');
     const attendingYes = document.getElementById('attendingYes');
+    const attendingNo = document.getElementById('attendingNo');
     const plusOneNameDiv = document.getElementById('plusOneNameDiv');
     const transportDiv = document.getElementById('transportDiv');
     const plusOneNameInput = document.getElementById('plusOneName');
@@ -230,18 +220,11 @@
         })
             .then(response => {
                 if (response.ok) {
-                    // Отключаем все поля формы
                     const formElements = form.elements;
                     for (let i = 0; i < formElements.length; i++) {
                         formElements[i].disabled = true;
                     }
-                    // <div id="thankYouModal" class="modal" th:if="${success}">
-                    //     <div class="modal-content">
-                    //         <span class="close" onclick="closeModal()">&times;</span>
-                    //         <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>
-                    //     </div>
-                    // </div>
-                    // Создаем и показываем сообщение об успехе
+                    document.body.style.overflow = 'hidden'
                     const alertDiv = document.createElement('div');
                     alertDiv.className = 'modal';
                     alertDiv.id = 'thankYouModal'
@@ -249,19 +232,13 @@
                     alertDiv.innerHTML = `
                    <div class="modal-content">
                             <span class="close" onclick="closeModal()">&times;</span>
-                            <p>Спасибо за ваш ответ!<br>Мы будем рады видеть вас на нашей свадьбе!</p>
-                        </div>
-`;
+                            <p>Спасибо за ваш ответ!<br>` + (attendingNo ? `Если измените ваше решение, заполните форму еще раз` : `Мы будем рады видеть вас на нашей свадьбе!`) +
+                        `</p></div>`;
                     form.insertBefore(alertDiv, form.firstChild);
 
                     // Скрываем индикатор загрузки
                     loadingIndicator.style.display = 'none';
 
-                    // Автоматически скрываем сообщение через 10 секунд
-                    // setTimeout(() => {
-                    //     const bsAlert = new bootstrap.Alert(alertDiv);
-                    //     bsAlert.close();
-                    // }, 10000);
                 } else {
                     throw new Error('Ошибка при отправке формы');
                 }
@@ -282,6 +259,7 @@
     });
     function closeModal() {
         document.getElementById("thankYouModal").style.display = "none";
+        document.body.style.overflow = ''
     }
 </script>
 </body>
