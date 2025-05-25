@@ -413,7 +413,7 @@ h1 {
 }
 
 .close:hover {
-    color: #000;
+    color: var(--text-color);
 }
 
 @keyframes fadeIn {
