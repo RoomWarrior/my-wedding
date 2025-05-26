@@ -158,8 +158,8 @@ p {
     background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
     border: none;
     padding: 15px;
-    font-weight: 500;
-    font-size: 1.3rem;
+    /*font-weight: 500;*/
+    /*font-size: 1.3rem;*/
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
@@ -461,18 +461,17 @@ h1 {
     position: relative;
 }
 
-.btn {
+.btn-action {
     background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
     color: white;
     border: none;
     padding: 8px 16px;
-    font-size: 0.9rem;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.btn:hover {
+.btn-action:hover {
     transform: scale(1.02); /* чуть больше 1 */
     color: white;
 }
