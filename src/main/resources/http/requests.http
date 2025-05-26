@@ -1,2 +1,6 @@
 ### guests
 GET https://my-wedding-jnur.onrender.com/guests
+
+### guests localhost
+GET http://localhost:8080/guests
+

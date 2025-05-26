@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +20,6 @@ public class GuestService {
 
     public synchronized void saveGuest(Guest guest) {
         List<Guest> guests = jsonFileService.loadData(Guest.class);
-
         if (guest.getId() == null) {
             Long newId = guests.stream()
                     .mapToLong(Guest::getId)
@@ -32,9 +29,20 @@ public class GuestService {
             guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
 
-        guests.removeIf(g -> Objects.equals(g.getName(), guest.getName()));
-        guests.add(guest);
+        guests.removeIf(g -> {
+            String guestName = guest.getName();
+            String existingName = g.getName();
 
+            if (guestName == null || existingName == null) {
+                return false;
+            }
+
+            Set<String> guestNameParts = new HashSet<>(Arrays.asList(guestName.toLowerCase().trim().split("\\s+")));
+            Set<String> existingNameParts = new HashSet<>(Arrays.asList(existingName.toLowerCase().trim().split("\\s+")));
+
+            return !guestNameParts.isEmpty() && guestNameParts.equals(existingNameParts);
+        });
+        guests.add(guest);
         jsonFileService.saveData(guests);
     }
 
