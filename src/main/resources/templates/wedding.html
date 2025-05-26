@@ -8,48 +8,59 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Marck+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Marck+Script&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <div class="wedding-header">
-    <h1>Артур & Карина</h1>
-    <div class="wedding-details">
+    <div class="flex items-center justify-center">
+        <div class="relative animate-on-scroll">
+            <div class="photo-wrapper">
+                <img class="image" alt="we" src="/images/we.jpg">
+            </div>
+        </div>
+    </div>
+    <h1 class="animate-on-scroll">Артур & Карина</h1>
+    <div class="wedding-details animate-on-scroll">
         <h2 class="lead">Дорогие друзья!</h2>
         <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни.</p>
-        <p>Это будет особенный праздник, наполненный любовью, радостью и счастьем, а каждый из вас - важная его часть.</p>
+        <p>Это будет особенный праздник, наполненный любовью, радостью и счастьем, а каждый из вас - важная его
+            часть.</p>
         <p>Пусть этот день запомнится теплом, яркими моментами и смехом</p>
     </div>
-    <div class="wedding-details">
+    <div class="wedding-details animate-on-scroll" >
         <h2 class="lead">Программа торжства</h2>
         <div class="timeline">
-            <div class="timeline-item">
+            <div class="timeline-item animate-on-scroll">
                 <img src="/images/champagne.svg" alt="Церемония">
                 <div class="time">15:00</div>
                 <div class="event">Собор гостей, фуршет</div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item animate-on-scroll">
                 <img src="/images/arch.svg" alt="Церемония">
                 <div class="time">16:00</div>
                 <div class="event">Внездная регистрация</div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item animate-on-scroll">
                 <img src="/images/cake.svg" alt="Банкет">
                 <div class="time">17:00</div>
                 <div class="event">Праздничный банкет</div>
             </div>
-            <div class="timeline-item">
+            <div class="timeline-item animate-on-scroll">
                 <img src="/images/saxophone.svg" alt="After party">
                 <div class="time">18:00</div>
                 <div class="event">Музыка, танцы, веселье!</div>
             </div>
         </div>
     </div>
-<div class="wedding-details">
-    <h2 class="lead">Мы будем ждать вас</h2>
+    <div class="wedding-details animate-on-scroll">
+        <h2 class="lead">Мы будем ждать вас</h2>
         <p>16 августа 2025 года</p>
-        <a href="https://2gis.kg/bishkek/firm/70000001079683718?m=74.67647%2C42.680937%2F16" target="_blank">Mountain View Resort</a>
+        <a href="https://2gis.kg/bishkek/firm/70000001079683718?m=74.67647%2C42.680937%2F16" target="_blank">Mountain
+            View Resort</a>
         <h2 class="lead">Дресс-код</h2>
-        <p>Будем благодарны, если вы поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре торжества</p>
+        <p>Будем благодарны, если вы поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре
+            торжества</p>
         <div class="color-palette">
             <div class="color-swatch" style="background-color: var(--sunset-orange);"></div>
             <div class="color-swatch" style="background-color: var(--accent-color);"></div>
@@ -66,7 +77,7 @@
 </div>
 
 <div class="container">
-    <div class="rsvp-form" id="rsvpFormContainer">
+    <div class="rsvp-form animate-on-scroll" id="rsvpFormContainer">
         <h2 class="text-center mb-4">RSVP</h2>
         <div id="loadingIndicator" class="text-center mb-3" style="display: none;">
             <div class="spinner-border text-primary" role="status">
@@ -144,13 +155,38 @@
             <button type="submit" class="btn btn-primary w-100" id="submitButton">Отправить</button>
         </form>
     </div>
-    <div>
+    <footer class="wedding-footer text-center mt-5">
+        <p class="mb-2 animate-on-scroll" style="font-family: 'Bad Script', cursive; font-size: 1.2rem;">
+            С любовью, Артур и Карина 💍
+        </p>
+        <p style="font-size: 0.9rem;" class="animate-on-scroll">© 2025 Все права защищены</p>
 
-    </div>
+        <button onclick="scrollToTop()" class="btn animate-on-scroll">↑ Наверх</button>
+    </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Анимация один раз
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    });
+
+
+
     const attendingPlusOne = document.getElementById('attendingPlusOne');
     const attendingYes = document.getElementById('attendingYes');
     const attendingNo = document.getElementById('attendingNo');
@@ -228,13 +264,13 @@
                     const alertDiv = document.createElement('div');
                     alertDiv.className = 'modal';
                     alertDiv.id = 'thankYouModal'
-                    alertDiv.role = 'alert';
+                    alertDiv.role = 'modal';
                     alertDiv.innerHTML = `
-                   <div class="modal-content">
+                   <div class="modal-content" style="font-family: 'Caveat', cursive">
                             <span class="close" onclick="closeModal()">&times;</span>
                             <p>Спасибо за ваш ответ!<br>` + (attendingNo ? `Если измените ваше решение, заполните форму еще раз` : `Мы будем рады видеть вас на нашей свадьбе!`) +
                         `</p></div>`;
-                    form.insertBefore(alertDiv, form.firstChild);
+                    document.body.appendChild(alertDiv);
 
                     // Скрываем индикатор загрузки
                     loadingIndicator.style.display = 'none';
@@ -257,9 +293,14 @@
     document.querySelectorAll('input[name="attending"]').forEach(radio => {
         radio.addEventListener('change', updateFormFields);
     });
+
     function closeModal() {
         document.getElementById("thankYouModal").style.display = "none";
         document.body.style.overflow = ''
+    }
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 </body>
