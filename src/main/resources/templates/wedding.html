@@ -77,7 +77,11 @@
         <form th:action="@{/rsvp}" th:object="${guest}" method="post" id="rsvpForm">
             <div class="mb-4">
                 <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                <input type="text" class="form-control" id="name" th:field="*{name}"
+                       required>
+                <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
+                    фамилию русскими буквами (например: Иван Петров)
+                </div>
             </div>
             <div class="mb-4">
                 <label for="relationType" class="form-label">Кем вы приходитесь молодоженам? <span
@@ -118,6 +122,9 @@
             <div class="mb-4" id="plusOneNameDiv" style="display: none;">
                 <label for="plusOneName" class="form-label">Имя и фамилия +1 <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
+                <div class="invalid-feedback" id="plusOneNameError" style="display: none;">Напишите, пожалуйста, имя и
+                    фамилию вашего +1 русскими буквами (например: Иван Петров)
+                </div>
             </div>
             <div class="mb-4" id="transportDiv" style="display: none;">
                 <label class="form-label">Как вы планируете добраться? <span class="text-danger">*</span></label>
@@ -159,6 +166,50 @@
     const plusOneNameInput = document.getElementById('plusOneName');
     const form = document.getElementById('rsvpForm');
     const submitButton = document.getElementById('submitButton');
+    const nameInput = document.getElementById('name');
+    const nameError = document.getElementById('nameError');
+    const plusOneInputError = document.getElementById('plusOneNameError');
+
+
+    function validateName(name) {
+        const nameRegex = /^[А-Яа-яЁё]+ [А-Яа-яЁё]+$/;
+        return nameRegex.test(name.trim());
+    }
+
+    nameInput.addEventListener('input', function() {
+        if (!validateName(this.value)) {
+            this.classList.add('is-invalid');
+            nameError.style.display = 'block';
+        } else {
+            this.classList.remove('is-invalid');
+            nameError.style.display = 'none';
+        }
+    });
+
+    nameInput.addEventListener('blur', function() {
+        if (!validateName(this.value)) {
+            this.classList.add('is-invalid');
+            nameError.style.display = 'block';
+        }
+    });
+
+    plusOneNameInput.addEventListener('input', function() {
+        if (attendingPlusOne.checked && !validateName(this.value)) {
+            this.classList.add('is-invalid');
+            plusOneInputError.style.display = 'block';
+        } else {
+            this.classList.remove('is-invalid');
+            plusOneInputError.style.display = 'none';
+        }
+    })
+
+    plusOneNameInput.addEventListener('blur', function() {
+        if (attendingPlusOne.checked && !validateName(this.value)) {
+            this.classList.add('is-invalid');
+            plusOneInputError.style.display = 'block';
+        }
+    })
+
 
     function updateFormFields() {
         const isAttending = attendingYes.checked || attendingPlusOne.checked;
@@ -193,6 +244,14 @@
     // Валидация формы
     form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        if (!validateName(nameInput.value.trim())) {
+            return;
+        }
+
+        if (attendingPlusOne.checked && !validateName(plusOneNameInput.value.trim())) {
+            return;
+        }
 
         if (attendingPlusOne.checked && !plusOneNameInput.value.trim()) {
             alert('Пожалуйста, укажите имя +1');
