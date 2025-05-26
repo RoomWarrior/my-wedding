@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class GuestService {
             guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
 
-        guests.removeIf(g -> g.getName().equals(guest.getName()));
+        guests.removeIf(g -> Objects.equals(g.getName(), guest.getName()));
         guests.add(guest);
 
         jsonFileService.saveData(guests);
