@@ -8,19 +8,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @Service
 @Slf4j
 public class JsonFileService {
     private static final String DATA_FILE_PATH = "wedding_data.json";
     private final ObjectMapper objectMapper;
-    private final ExecutorService executorService;
 
     public JsonFileService() {
         this.objectMapper = new ObjectMapper();
-        this.executorService = Executors.newSingleThreadExecutor();
         createFileIfNotExists();
     }
 
@@ -48,7 +44,6 @@ public class JsonFileService {
     }
 
     public <T> void saveData(List<T> data) {
-        executorService.submit(() -> {
             try {
                 File file = new File(DATA_FILE_PATH);
                 if (!file.exists()) {
@@ -59,6 +54,5 @@ public class JsonFileService {
             } catch (IOException e) {
                 throw new RuntimeException("Failed to save data to JSON file", e);
             }
-        });
     }
 } 

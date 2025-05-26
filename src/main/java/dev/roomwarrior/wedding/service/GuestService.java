@@ -19,9 +19,9 @@ public class GuestService {
 
     private final JsonFileService jsonFileService;
 
-    public void saveGuest(Guest guest) {
+    public synchronized void saveGuest(Guest guest) {
         List<Guest> guests = jsonFileService.loadData(Guest.class);
-        
+
         if (guest.getId() == null) {
             Long newId = guests.stream()
                     .mapToLong(Guest::getId)
@@ -30,10 +30,10 @@ public class GuestService {
             guest.setId(newId);
             guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
-        
-        guests.removeIf(g -> g.getId().equals(guest.getId()));
+
+        guests.removeIf(g -> g.getName().equals(guest.getName()));
         guests.add(guest);
-        
+
         jsonFileService.saveData(guests);
     }
 
