@@ -1,5 +1,6 @@
 package dev.roomwarrior.wedding.controller;
 
+import dev.roomwarrior.wedding.annotation.RequireApiKey;
 import dev.roomwarrior.wedding.model.Guest;
 import dev.roomwarrior.wedding.model.GuestSummaryInfo;
 import dev.roomwarrior.wedding.service.GuestService;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/guests")
 @RequiredArgsConstructor
+@RequireApiKey
 public class GuestsInfoRestController {
 
     private final GuestService guestService;

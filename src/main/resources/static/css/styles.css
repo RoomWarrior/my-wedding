@@ -12,35 +12,23 @@
 }
 
 body {
-    background-color: var(--light-bg);
+    background: linear-gradient(135deg, var(--light-bg) 0%, #fff5f0 50%, var(--light-bg-purple) 100%);
     font-family: 'Caveat', cursive;
     color: var(--text-color);
     line-height: 1.6;
     font-size: 1.3rem;
+    min-height: 100vh;
 }
 
 .wedding-header {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-    url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
+    background: transparent;
     position: relative;
 }
 
 .wedding-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    z-index: -1;
+    display: none;
 }
 
 .wedding-header h1 {

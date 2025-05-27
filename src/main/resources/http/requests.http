@@ -1,6 +1,7 @@
 ### guests
 GET https://my-wedding-jnur.onrender.com/guests
+X-API-Key: {{apiKey}}
 
 ### guests localhost
 GET http://localhost:8080/guests
-
+X-API-Key: {{apiKey}}
