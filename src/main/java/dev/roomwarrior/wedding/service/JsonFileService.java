@@ -39,6 +39,7 @@ public class JsonFileService {
             }
             return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
+            log.error("Failed to load data from JSON file", e);
             return new ArrayList<>();
         }
     }
