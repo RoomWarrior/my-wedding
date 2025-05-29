@@ -6,6 +6,10 @@ X-API-Key: {{apiKey}}
 GET http://localhost:8080/guests
 X-API-Key: {{apiKey}}
 
-### guests summary
+### guests summary localhost
 GET http://localhost:8080/guests/summary
+X-API-Key: {{apiKey}}
+
+### guests summary
+GET https://my-wedding-jnur.onrender.com/guests/summary
 X-API-Key: {{apiKey}}

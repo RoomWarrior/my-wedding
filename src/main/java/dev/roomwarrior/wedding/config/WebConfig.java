@@ -1,17 +1,16 @@
 package dev.roomwarrior.wedding.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.roomwarrior.wedding.interceptor.ApiKeyInterceptor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import dev.roomwarrior.wedding.interceptor.ApiKeyInterceptor;
-
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private ApiKeyInterceptor apiKeyInterceptor;
+    private final ApiKeyInterceptor apiKeyInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
