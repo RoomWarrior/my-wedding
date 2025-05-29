@@ -29,6 +29,7 @@ public class Guest {
                 .name(name)
                 .needTransport(needsTransport)
                 .plusOneName(plusOneName)
+                .relationType(relationType)
                 .build();
     }
 } 
