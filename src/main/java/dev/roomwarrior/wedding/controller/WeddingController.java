@@ -1,7 +1,7 @@
 package dev.roomwarrior.wedding.controller;
 
 import dev.roomwarrior.wedding.enums.AttendingEnum;
-import dev.roomwarrior.wedding.model.Guest;
+import dev.roomwarrior.wedding.model.GuestModel;
 import dev.roomwarrior.wedding.service.GuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,8 +18,8 @@ public class WeddingController {
 
     @GetMapping("/")
     public String home(Model model) {
-        if (!model.containsAttribute("guest")) {
-            model.addAttribute("guest", Guest.builder()
+        if (!model.containsAttribute("guestModel")) {
+            model.addAttribute("guestModel", GuestModel.builder()
                     .attending(AttendingEnum.YES)
                     .build());
         }
@@ -27,10 +27,10 @@ public class WeddingController {
     }
 
     @PostMapping("/rsvp")
-    public String rsvp(Guest guest, RedirectAttributes redirectAttributes) {
-        guestService.saveGuest(guest);
+    public String rsvp(GuestModel guestModel, RedirectAttributes redirectAttributes) {
+        guestService.saveGuest(guestModel);
         redirectAttributes.addFlashAttribute("success", true);
-        redirectAttributes.addFlashAttribute("guest", guest);
+        redirectAttributes.addFlashAttribute("guest", guestModel);
         return "redirect:/";
     }
 }

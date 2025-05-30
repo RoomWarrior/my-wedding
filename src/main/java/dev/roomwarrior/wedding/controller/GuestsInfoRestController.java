@@ -1,7 +1,7 @@
 package dev.roomwarrior.wedding.controller;
 
 import dev.roomwarrior.wedding.annotation.RequireApiKey;
-import dev.roomwarrior.wedding.model.Guest;
+import dev.roomwarrior.wedding.model.GuestModel;
 import dev.roomwarrior.wedding.model.GuestSummaryInfo;
 import dev.roomwarrior.wedding.service.GuestService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class GuestsInfoRestController {
     private final GuestService guestService;
 
     @GetMapping
-    public ResponseEntity<List<Guest>> getAllGuests() {
+    public ResponseEntity<List<GuestModel>> getAllGuests() {
         return ResponseEntity.ok(guestService.getAllGuests());
     }
 

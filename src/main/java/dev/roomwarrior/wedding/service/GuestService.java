@@ -1,17 +1,18 @@
 package dev.roomwarrior.wedding.service;
 
+import dev.roomwarrior.wedding.entities.Guest;
 import dev.roomwarrior.wedding.enums.AttendingEnum;
 import dev.roomwarrior.wedding.enums.RelationType;
-import dev.roomwarrior.wedding.model.Guest;
+import dev.roomwarrior.wedding.model.GuestModel;
 import dev.roomwarrior.wedding.model.GuestResponseModel;
 import dev.roomwarrior.wedding.model.GuestSummaryInfo;
+import dev.roomwarrior.wedding.repos.GuestRepo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,34 +20,24 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GuestService {
 
-    private final JsonFileService jsonFileService;
+    private final GuestRepo guestRepo;
 
-    private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    @Transactional
+    public void saveGuest(GuestModel guestModel) {
+        List<Guest> toDelete = getAllGuests().stream()
+                .filter(existing -> hasSameName(guestModel, existing))
+                .map(GuestModel::toEntity)
+                .toList();
 
-    public synchronized void saveGuest(Guest guest) {
-        List<Guest> guests = getAllGuests();
+        if (!toDelete.isEmpty())
+            guestRepo.deleteAll(toDelete);
 
-        if (guest.getId() == null) {
-            initializeNewGuest(guest, guests);
-        }
-
-        guests.removeIf(existingGuest -> hasSameName(guest, existingGuest));
-        guests.add(guest);
-        jsonFileService.saveData(guests);
+        guestRepo.save(guestModel.toEntity());
     }
 
-    private void initializeNewGuest(Guest guest, List<Guest> guests) {
-        Long newId = guests.stream()
-                .mapToLong(Guest::getId)
-                .max()
-                .orElse(0L) + 1;
-        guest.setId(newId);
-        guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN)));
-    }
-
-    private boolean hasSameName(Guest newGuest, Guest existingGuest) {
-        String newGuestName = newGuest.getName();
-        String existingName = existingGuest.getName();
+    private boolean hasSameName(GuestModel newGuestModel, GuestModel existingGuestModel) {
+        String newGuestName = newGuestModel.getName();
+        String existingName = existingGuestModel.getName();
 
         if (newGuestName == null || existingName == null) {
             return false;
@@ -62,16 +53,16 @@ public class GuestService {
         return new HashSet<>(Arrays.asList(name.toLowerCase().trim().split("\\s+")));
     }
 
-    public List<Guest> getAllGuests() {
-        return jsonFileService.loadData(Guest.class);
+    public List<GuestModel> getAllGuests() {
+        return guestRepo.findAll().stream().map(Guest::toModel).toList();
     }
 
     public GuestSummaryInfo guestSummaryInfo() {
-        List<Guest> guests = getAllGuests();
-        GuestStatistics statistics = calculateGuestStatistics(guests);
+        List<GuestModel> guestModels = getAllGuests();
+        GuestStatistics statistics = calculateGuestStatistics(guestModels);
 
-        Map<RelationType, List<GuestResponseModel>> categorizedGuests = guests.stream()
-                .map(Guest::toResponseModel)
+        Map<RelationType, List<GuestResponseModel>> categorizedGuests = guestModels.stream()
+                .map(GuestModel::toResponseModel)
                 .collect(Collectors.groupingBy(
                         GuestResponseModel::getRelationType,
                         Collectors.toList()
@@ -105,14 +96,14 @@ public class GuestService {
         }
     }
 
-    private GuestStatistics calculateGuestStatistics(List<Guest> guests) {
+    private GuestStatistics calculateGuestStatistics(List<GuestModel> guestModels) {
         List<GuestResponseModel> notAttending = new ArrayList<>();
         int attendingCount = 0;
         int needTransportCount = 0;
 
-        for (Guest guest : guests) {
-            GuestResponseModel response = guest.toResponseModel();
-            AttendingEnum attending = guest.getAttending();
+        for (GuestModel guestModel : guestModels) {
+            GuestResponseModel response = guestModel.toResponseModel();
+            AttendingEnum attending = guestModel.getAttending();
 
             if (attending == AttendingEnum.NO) {
                 notAttending.add(response);
@@ -129,4 +120,4 @@ public class GuestService {
 
         return new GuestStatistics(attendingCount, needTransportCount, notAttending);
     }
-} 
+}
