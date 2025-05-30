@@ -1,59 +1,49 @@
 :root {
     /*--primary-color: #2C3E50;  !* Глубокий синий гор *!*/
-    --accent-color: #eead91; /* Теплый оранжевый заката */
-    --text-color: #555555; /* Темно-red текст */
+    --accent-color: #e8cfcf; /* Теплый оранжевый заката */
+    --text-color: #3e3a3b; /* Темно-red текст */
     --light-bg: #f3e8dc; /* Светлый фон */
     --nature-green: #445439; /* Зеленый лес */
     /*--soft-green: #9ead5c;     !* Светлый зеленый *!*/
-    --mountain-blue: #712814; /* Синий неба */
+    --mountain-blue: #6b010e; /* Синий неба */
     --rock-brown: #a46c57; /* Серый скал */
     --sunset-orange: #cd5222; /* Оранжевый заката */
     --light-bg-purple: #d4c0b9; /* Фиолетовый горных вершин */
 }
 
 body {
-    background-color: var(--light-bg);
-    font-family: 'Caveat', cursive;
+    /*background: linear-gradient(135deg, #e0dbdc 0%, #f0e5d0 50%, #f6f5f4 100%);*/
+    /*background: #f6f5f4;*/
+    background: #f0e5d0;
+    font-family: 'Neucha', cursive;
     color: var(--text-color);
     line-height: 1.6;
     font-size: 1.3rem;
+    min-height: 100vh;
 }
 
 .wedding-header {
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-    url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
+    padding: 60px 20px 0 20px;
+    background: transparent;
     position: relative;
 }
 
 .wedding-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.15;
-    z-index: -1;
+    display: none;
 }
 
 .wedding-header h1 {
     margin-bottom: 1rem;
     font-weight: 500;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-    font-family: "Marck Script", cursive;
+    font-family: "Caveat", cursive;
     font-size: 3.5rem;
     color: var(--mountain-blue);
 }
 
 .lead {
-    font-family: "Marck Script", cursive;
+    font-family: "Caveat", cursive;
     font-size: 2rem;
     color: var(--mountain-blue);
     font-weight: 500;
@@ -122,7 +112,7 @@ p {
 }
 
 .rsvp-form h2 {
-    font-family: 'Marck Script', serif;
+    font-family: 'Caveatt', serif;
     color: var(--mountain-blue);
     margin-bottom: 1.5rem;
     font-weight: 500;
@@ -155,7 +145,7 @@ p {
 }
 
 .btn-primary {
-    background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
+    background: var(--mountain-blue);
     border: none;
     padding: 15px;
     /*font-weight: 500;*/
@@ -215,10 +205,27 @@ textarea.form-control {
     box-shadow: none;
 }
 
+.images-wrapper {
+    position: absolute;
+    width: 100%;
+}
+
+@media (max-width: 1150px) {
+    .images-wrapper {
+        position: relative;
+    }
+}
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 768px) {
+    .container-rsvp {
+        margin: 0 15px;
+    }
     .wedding-header {
-        padding: 40px 15px;
+        padding: 40px 15px 0 15px;
+    }
+
+    .wedding-bottom {
+        padding: 0 15px 0 15px;
     }
 
     .wedding-header h1 {
@@ -226,7 +233,7 @@ textarea.form-control {
     }
 
     .lead {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
 
     p {
@@ -247,7 +254,7 @@ textarea.form-control {
 
     .rsvp-form {
         padding: 20px 15px;
-        margin: 0 15px;
+        margin: 0 auto;
     }
 
     .rsvp-form h2 {
@@ -279,7 +286,7 @@ textarea.form-control {
     }
 
     .lead {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     p {
@@ -328,9 +335,9 @@ textarea.form-control {
     }
 }
 
-.container {
-    margin-block: 3rem;
-}
+/*.container {*/
+/*    margin-block: 0 3rem;*/
+/*}*/
 
 .time {
     margin-right: 1rem;
@@ -369,7 +376,7 @@ h1 {
 
 .timeline-item .time {
     font-weight: bold;
-    color: #555;
+    color: var(--mountain-blue);
 }
 
 .timeline-item .event {
@@ -444,11 +451,70 @@ h1 {
     transform: translateY(0);
 }
 
+.parent-wrapper {
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+}
+.photo-wrapper-both {
+    position: absolute;
+    top: 0;
+    /*width: 600px;*/
+    /*height: 400px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.img-1 {
+    /*position: relative;*/
+    z-index: 1;
+    /*top: 50px;*/
+    /*left: 0;*/
+    /*z-index: 2;*/
+    left: 0;
+}
+
+.img-1 image {
+    left: 0;
+}
+
+.img-2 image {
+    right: 0;
+}
+
+.img-2 {
+    /*position: absolute;*/
+    /*top: 100px;*/
+    /*left: 100px;*/
+    /*!*z-index: 2;*!*/
+    /*top: 100px;*/
+    /*left: 100px;*/
+    /*z-index: 1;*/
+    right: 0;
+}
+
+.photo-wrapper-both img{
+    width: 350px;
+    /*height: 300px;*/
+    /*position: absolute;*/
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 .photo-wrapper img {
     margin-bottom: 1rem;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    width: 300px;
+    height: 315px;
+    border-radius: 0 0 50% 50%;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
@@ -462,7 +528,7 @@ h1 {
 }
 
 .btn-action {
-    background: linear-gradient(to right, var(--mountain-blue), var(--accent-color));
+    background: var(--mountain-blue);
     color: white;
     border: none;
     padding: 8px 16px;
@@ -476,5 +542,9 @@ h1 {
     color: white;
 }
 
-
-
+.wedding-bottom {
+    text-align: center;
+    padding: 0 20px 0 20px;
+    background: transparent;
+    position: relative;
+}
