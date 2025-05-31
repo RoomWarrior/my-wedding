@@ -93,7 +93,7 @@
             </div>
             <p class="mt-2">Отправка формы...</p>
         </div>
-        <form th:action="@{/rsvp}" th:object="${guest}" method="post" id="rsvpForm">
+        <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
             <div class="mb-4">
                 <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" th:field="*{name}"
@@ -110,7 +110,7 @@
                     <option th:each="type : ${T(dev.roomwarrior.wedding.enums.RelationType).values()}"
                             th:value="${type}"
                             th:text="${type.displayName}"
-                            th:selected="${guest.relationType == type}">Тип отношений
+                            th:selected="${guestModel.relationType == type}">Тип отношений
                     </option>
                 </select>
             </div>
@@ -223,7 +223,7 @@
 
 
     function validateName(name) {
-        const nameRegex = /^[А-Яа-яЁё]+ [А-Яа-яЁё]+$/;
+        const nameRegex = /^[А-Яа-яЁё]+ [А-Яа-яЁё]+( [А-Яа-яЁё]+)?$/;
         return nameRegex.test(name.trim());
     }
 
