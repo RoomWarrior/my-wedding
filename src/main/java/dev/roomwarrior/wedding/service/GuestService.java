@@ -80,7 +80,7 @@ public class GuestService {
                                 .name(g.getPlusOneName())
                                 .relationType(g.getRelationType())
                                 .needTransport(g.getNeedsTransport())
-                                .plusOneName(null)
+                                .plusOneName(g.getName())
                                 .build();
                         res.add(plusOne);
                     }
