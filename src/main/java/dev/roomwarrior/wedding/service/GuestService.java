@@ -70,10 +70,22 @@ public class GuestService {
         List<GuestModel> guests = getAllGuests();
         GuestStatistics statistics = calculateGuestStatistics(guests);
 
-        // Фильтруем только тех, кто придёт
         Map<RelationType, List<GuestResponseModel>> categorizedGuests = guests.stream()
                 .filter(g -> g.getAttending() == AttendingEnum.YES || g.getAttending() == AttendingEnum.PLUS_ONE)
-                .map(GuestModel::toResponseModel)
+                .flatMap(g -> {
+                    List<GuestResponseModel> res = new ArrayList<>();
+                    res.add(g.toResponseModel());
+                    if (g.getAttending() == AttendingEnum.PLUS_ONE && g.getPlusOneName() != null && !g.getPlusOneName().isBlank()) {
+                        GuestResponseModel plusOne = GuestResponseModel.builder()
+                                .name(g.getPlusOneName())
+                                .relationType(g.getRelationType())
+                                .needTransport(g.getNeedsTransport())
+                                .plusOneName(null)
+                                .build();
+                        res.add(plusOne);
+                    }
+                    return res.stream();
+                })
                 .collect(Collectors.groupingBy(
                         GuestResponseModel::getRelationType,
                         Collectors.toList()
