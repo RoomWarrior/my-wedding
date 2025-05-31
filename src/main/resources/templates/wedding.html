@@ -8,7 +8,7 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Marck+Script&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Marck+Script&display=swap&family=Neucha&display=swap"
           rel="stylesheet">
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 </head>
@@ -17,11 +17,12 @@
     <div class="flex items-center justify-center">
         <div class="relative animate-on-scroll">
             <div class="photo-wrapper">
-                <img class="image" alt="we" src="/images/we.jpg">
+                <img class="image" alt="we" src="/images/img.png">
             </div>
         </div>
     </div>
-    <h1 class="animate-on-scroll">Артур & Карина</h1>
+    <h1 class="animate-on-scroll">Мы - Артур и Карина</h1>
+    <h3 class="animate-on-scroll">И мы решили пожениться и позвать именно вас!</h3>
     <div class="wedding-details animate-on-scroll">
         <h2 class="lead">Дорогие друзья!</h2>
         <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни.</p>
@@ -60,23 +61,30 @@
         <a href="https://2gis.kg/bishkek/firm/70000001079683718?m=74.67647%2C42.680937%2F16" target="_blank">Mountain
             View Resort</a>
         <h2 class="lead">Дресс-код</h2>
-        <p>Будем благодарны, если вы поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре
+        <p>Мы будем очень рады, если вы поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре
             торжества</p>
-        <div class="color-palette">
-            <div class="color-swatch" style="background-color: var(--sunset-orange);"></div>
-            <div class="color-swatch" style="background-color: var(--accent-color);"></div>
-            <div class="color-swatch" style="background-color: var(--mountain-blue);"></div>
-            <div class="color-swatch" style="background-color: var(--rock-brown);"></div>
-            <div class="color-swatch" style="background-color: var(--light-bg-purple);"></div>
-            <div class="color-swatch" style="background-color: var(--nature-green);"></div>
-        </div>
 
-        <h2 class="lead">Пожелания</h2>
-        <p>Вместо цветов мы будем рады вашему присутствию и теплым пожеланиям</p>
+        <div class="color-palette">
+            <div class="color-swatch" style="background-color: #809671;"></div>
+            <div class="color-swatch" style="background-color: #B3B792;"></div>
+            <div class="color-swatch" style="background-color: #E5E0D8;"></div>
+            <div class="color-swatch" style="background-color: #E5D2B8;"></div>
+            <div class="color-swatch" style="background-color: #D2AB80;"></div>
+            <div class="color-swatch" style="background-color: #725C3A;"></div>
+        </div>
     </div>
 </div>
-
-<div class="container">
+<div class="flex items-center justify-center images-wrapper">
+    <div class="animate-on-scroll parent-wrapper">
+        <div class="photo-wrapper-both img-1">
+            <img class="image" alt="we" src="/images/img_1.png">
+        </div>
+        <div class="photo-wrapper-both img-2">
+            <img class="image" alt="we" src="/images/img_2.png">
+        </div>
+    </div>
+</div>
+<div class="container-rsvp">
     <div class="rsvp-form animate-on-scroll" id="rsvpFormContainer">
         <h2 class="text-center mb-4">RSVP</h2>
         <div id="loadingIndicator" class="text-center mb-3" style="display: none;">
@@ -85,7 +93,7 @@
             </div>
             <p class="mt-2">Отправка формы...</p>
         </div>
-        <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
+        <form th:action="@{/rsvp}" th:object="${guest}" method="post" id="rsvpForm">
             <div class="mb-4">
                 <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" th:field="*{name}"
@@ -102,7 +110,7 @@
                     <option th:each="type : ${T(dev.roomwarrior.wedding.enums.RelationType).values()}"
                             th:value="${type}"
                             th:text="${type.displayName}"
-                            th:selected="${guestModel.relationType == type}">Тип отношений
+                            th:selected="${guest.relationType == type}">Тип отношений
                     </option>
                 </select>
             </div>
@@ -162,16 +170,24 @@
             <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
         </form>
     </div>
-    <footer class="wedding-footer text-center mt-5 animate-on-scroll">
+</div>
+    <div class="wedding-bottom">
+        <div class="wedding-details animate-on-scroll">
+
+            <h2 class="lead">Кстати</h2>
+            <p>Мы не любим цветы, но если вы хотите сделать нам приятно, то <span style="color: var(--mountain-blue)">ВМЕСТО</span> цветов, мы будем очень рады чему-нибудь из нашего виш листа</p>
+            <a href="https://followish.io/mywishlist/gulc04s3lbwbmt"><button class="btn-action">Вишлист</button></a>
+        </div>
+    </div>
+    <footer class="wedding-footer text-center mt-5 mb-3 animate-on-scroll">
         <p class="mb-2" style="font-size: 1.2rem; font-weight: 100">
-            С любовью, Артур и Карина 💍
+            Сделано с любовью, Артуром и Кариной 💍
         </p>
         <p style="font-size: 0.9rem;">© 2025 Все права защищены</p>
 
         <button onclick="scrollToTop()" class="btn-action animate-on-scroll">↑ Наверх</button>
     </footer>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
     document.addEventListener("DOMContentLoaded", function () {
