@@ -214,6 +214,16 @@ textarea.form-control {
     .images-wrapper {
         position: relative;
     }
+
+    .photo-wrapper-both img {
+        width: 63vw;
+    }
+}
+
+@media (min-width: 1151px) {
+    .photo-wrapper-both img {
+        width: 35vw;
+    }
 }
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 768px) {
@@ -452,7 +462,7 @@ h1 {
 }
 
 .parent-wrapper {
-    height: 300px;
+    height: 50vw;
     margin: 0 auto;
     position: relative;
     overflow: visible;
@@ -498,7 +508,6 @@ h1 {
 }
 
 .photo-wrapper-both img{
-    width: 350px;
     /*height: 300px;*/
     /*position: absolute;*/
     transition: all 0.3s ease;
