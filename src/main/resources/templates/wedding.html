@@ -22,7 +22,7 @@
         </div>
     </div>
     <h1 class="animate-on-scroll">Мы - Артур и Карина</h1>
-    <h3 class="animate-on-scroll">И мы решили пожениться и позвать именно вас!</h3>
+    <h3 class="animate-on-scroll">решили пожениться и позвать именно вас!</h3>
     <div class="wedding-details animate-on-scroll">
         <h2 class="lead">Дорогие друзья!</h2>
         <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни.</p>
@@ -30,18 +30,18 @@
             часть.</p>
         <p>Пусть этот день запомнится теплом, яркими моментами и смехом</p>
     </div>
-    <div class="wedding-details animate-on-scroll" >
+    <div class="wedding-details animate-on-scroll">
         <h2 class="lead">Программа торжества</h2>
         <div class="timeline">
             <div class="timeline-item animate-on-scroll">
                 <img src="/images/champagne.svg" alt="Церемония">
                 <div class="time">15:00</div>
-	            <div class="event">Сбор гостей, фуршет</div>
+                <div class="event">Сбор гостей, фуршет</div>
             </div>
             <div class="timeline-item animate-on-scroll">
                 <img src="/images/arch.svg" alt="Церемония">
                 <div class="time">16:00</div>
-	            <div class="event">Церемония</div>
+                <div class="event">Церемония</div>
             </div>
             <div class="timeline-item animate-on-scroll">
                 <img src="/images/cake.svg" alt="Банкет">
@@ -74,113 +74,120 @@
         </div>
     </div>
 </div>
-<div class="flex items-center justify-center images-wrapper">
-    <div class="animate-on-scroll parent-wrapper">
-        <div class="photo-wrapper-both img-1">
-            <img class="image" alt="we" src="/images/img_1.png">
+<div class="animate-on-scroll">
+    <div class="flex items-center justify-center images-wrapper">
+        <div class="parent-wrapper">
+            <div class="photo-wrapper-both img-1">
+                <img class="image" alt="we" src="/images/img_1.png">
+            </div>
+            <div class="photo-wrapper-both img-2">
+                <img class="image" alt="we" src="/images/img_2.png">
+            </div>
         </div>
-        <div class="photo-wrapper-both img-2">
-            <img class="image" alt="we" src="/images/img_2.png">
+    </div>
+    <div class="container-rsvp">
+        <div class="rsvp-form" id="rsvpFormContainer">
+            <h2 class="text-center mb-4">RSVP</h2>
+            <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
+                <div class="mb-4">
+                    <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"
+                           required>
+                    <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
+                        фамилию русскими буквами (например: Иван Петров)
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="relationType" class="form-label">Кем вы приходитесь молодоженам? <span
+                            class="text-danger">*</span></label>
+                    <select class="form-control" id="relationType" name="relationType" required>
+                        <option value="" disabled selected>Выберите</option>
+                        <option th:each="type : ${T(dev.roomwarrior.wedding.enums.RelationType).values()}"
+                                th:value="${type}"
+                                th:text="${type.displayName}"
+                                th:selected="${guestModel.relationType == type}">Тип отношений
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Выберите вариант <span class="text-danger">*</span></label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingYes"
+                               th:field="*{attending}" th:value="YES" required>
+                        <label class="form-check-label" for="attendingYes">
+                            Я приду
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingPlusOne"
+                               th:field="*{attending}" th:value="PLUS_ONE" required>
+                        <label class="form-check-label" for="attendingPlusOne">
+                            Я приду со второй половинкой
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingNo"
+                               th:field="*{attending}" th:value="NO" required>
+                        <label class="form-check-label" for="attendingNo">
+                            К сожалению, не смогу прийти
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4" id="plusOneNameDiv" style="display: none;">
+                    <label for="plusOneName" class="form-label">Имя и фамилия вашей второй половинки<span
+                            class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
+                    <div class="invalid-feedback" id="plusOneNameError" style="display: none;">Напишите, пожалуйста, имя
+                        и
+                        фамилию вашей второй половинки русскими буквами (например: Иван Петров)
+                    </div>
+                </div>
+                <div class="mb-4" id="transportDiv" style="display: none;">
+                    <label class="form-label">Как вы планируете добраться? <span class="text-danger">*</span></label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsTransport" id="transportNo"
+                               th:field="*{needsTransport}" th:value="false" required>
+                        <label class="form-check-label" for="transportNo">
+                            Доберусь своим ходом
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="needsTransport" id="transportYes"
+                               th:field="*{needsTransport}" th:value="true" required>
+                        <label class="form-check-label" for="transportYes">
+                            Нашим трансфером
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="form-label">Сообщение для молодоженов </label>
+                    <textarea style="resize: none;" class="form-control" id="message" th:field="*{message}"
+                              rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
+            </form>
         </div>
     </div>
 </div>
-<div class="container-rsvp">
-    <div class="rsvp-form animate-on-scroll" id="rsvpFormContainer">
-        <h2 class="text-center mb-4">RSVP</h2>
-        <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
-            <div class="mb-4">
-                <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="name" th:field="*{name}"
-                       required>
-                <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
-                    фамилию русскими буквами (например: Иван Петров)
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="relationType" class="form-label">Кем вы приходитесь молодоженам? <span
-                        class="text-danger">*</span></label>
-                <select class="form-control" id="relationType" name="relationType" required>
-                    <option value="" disabled selected>Выберите</option>
-                    <option th:each="type : ${T(dev.roomwarrior.wedding.enums.RelationType).values()}"
-                            th:value="${type}"
-                            th:text="${type.displayName}"
-                            th:selected="${guestModel.relationType == type}">Тип отношений
-                    </option>
-                </select>
-            </div>
-            <div class="mb-4">
-                <label class="form-label">Выберите вариант <span class="text-danger">*</span></label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="attending" id="attendingYes"
-                           th:field="*{attending}" th:value="YES" required>
-                    <label class="form-check-label" for="attendingYes">
-                        Я приду
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="attending" id="attendingPlusOne"
-                           th:field="*{attending}" th:value="PLUS_ONE" required>
-                    <label class="form-check-label" for="attendingPlusOne">
-                        Я приду со второй половинкой
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="attending" id="attendingNo"
-                           th:field="*{attending}" th:value="NO" required>
-                    <label class="form-check-label" for="attendingNo">
-                        К сожалению, не смогу прийти
-                    </label>
-                </div>
-            </div>
-            <div class="mb-4" id="plusOneNameDiv" style="display: none;">
-                <label for="plusOneName" class="form-label">Имя и фамилия вашей второй половинки<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
-                <div class="invalid-feedback" id="plusOneNameError" style="display: none;">Напишите, пожалуйста, имя и
-                    фамилию вашей второй половинки русскими буквами (например: Иван Петров)
-                </div>
-            </div>
-            <div class="mb-4" id="transportDiv" style="display: none;">
-                <label class="form-label">Как вы планируете добраться? <span class="text-danger">*</span></label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="needsTransport" id="transportNo"
-                           th:field="*{needsTransport}" th:value="false" required>
-                    <label class="form-check-label" for="transportNo">
-                        Доберусь своим ходом
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="needsTransport" id="transportYes"
-                           th:field="*{needsTransport}" th:value="true" required>
-                    <label class="form-check-label" for="transportYes">
-                        Нашим трансфером
-                    </label>
-                </div>
-            </div>
-            <div class="mb-4">
-                <label for="message" class="form-label">Сообщение для молодоженов </label>
-                <textarea style="resize: none;" class="form-control" id="message" th:field="*{message}"
-                          rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
-        </form>
+<div class="wedding-bottom">
+    <div class="wedding-details animate-on-scroll">
+        <h2 class="lead">Кстати</h2>
+        <p>Мы не любим цветы, но если вы хотите сделать нам приятно, то <span
+                style="color: var(--mountain-blue)">ВМЕСТО</span> цветов, мы будем очень рады чему-нибудь из нашего виш
+            листа</p>
+        <a href="https://followish.io/mywishlist/gulc04s3lbwbmt">
+            <button class="btn-action">Вишлист</button>
+        </a>
     </div>
 </div>
-    <div class="wedding-bottom">
-        <div class="wedding-details animate-on-scroll">
+<footer class="wedding-footer text-center mt-5 mb-3 animate-on-scroll">
+    <p class="mb-2" style="font-size: 1.2rem; font-weight: 100">
+        Сделано с любовью, Артуром и Кариной 💍
+    </p>
+    <p style="font-size: 0.9rem;">© 2025 Все права защищены</p>
 
-            <h2 class="lead">Кстати</h2>
-            <p>Мы не любим цветы, но если вы хотите сделать нам приятно, то <span style="color: var(--mountain-blue)">ВМЕСТО</span> цветов, мы будем очень рады чему-нибудь из нашего виш листа</p>
-            <a href="https://followish.io/mywishlist/gulc04s3lbwbmt"><button class="btn-action">Вишлист</button></a>
-        </div>
-    </div>
-    <footer class="wedding-footer text-center mt-5 mb-3 animate-on-scroll">
-        <p class="mb-2" style="font-size: 1.2rem; font-weight: 100">
-            Сделано с любовью, Артуром и Кариной 💍
-        </p>
-        <p style="font-size: 0.9rem;">© 2025 Все права защищены</p>
-
-        <button onclick="scrollToTop()" class="btn-action animate-on-scroll">↑ Наверх</button>
-    </footer>
+    <button onclick="scrollToTop()" class="btn-action animate-on-scroll">↑ Наверх</button>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
@@ -202,7 +209,6 @@
     });
 
 
-
     const attendingPlusOne = document.getElementById('attendingPlusOne');
     const attendingYes = document.getElementById('attendingYes');
     const attendingNo = document.getElementById('attendingNo');
@@ -221,7 +227,7 @@
         return nameRegex.test(name.trim());
     }
 
-    nameInput.addEventListener('input', function() {
+    nameInput.addEventListener('input', function () {
         if (!validateName(this.value)) {
             this.classList.add('is-invalid');
             nameError.style.display = 'block';
@@ -231,14 +237,14 @@
         }
     });
 
-    nameInput.addEventListener('blur', function() {
+    nameInput.addEventListener('blur', function () {
         if (!validateName(this.value)) {
             this.classList.add('is-invalid');
             nameError.style.display = 'block';
         }
     });
 
-    plusOneNameInput.addEventListener('input', function() {
+    plusOneNameInput.addEventListener('input', function () {
         if (attendingPlusOne.checked && !validateName(this.value)) {
             this.classList.add('is-invalid');
             plusOneInputError.style.display = 'block';
@@ -248,7 +254,7 @@
         }
     })
 
-    plusOneNameInput.addEventListener('blur', function() {
+    plusOneNameInput.addEventListener('blur', function () {
         if (attendingPlusOne.checked && !validateName(this.value)) {
             this.classList.add('is-invalid');
             plusOneInputError.style.display = 'block';
@@ -363,7 +369,7 @@
     }
 
     function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 </script>
 </body>
