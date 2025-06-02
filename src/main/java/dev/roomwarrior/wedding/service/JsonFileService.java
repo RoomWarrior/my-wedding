@@ -1,7 +1,9 @@
 package dev.roomwarrior.wedding.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,27 +15,36 @@ import java.util.List;
 @Slf4j
 public class JsonFileService {
     private final ObjectMapper objectMapper;
-    private final String dataFilePath;
+
+    @Value("${data-path}")
+    private String dataFilePath;
 
     public JsonFileService() {
         this.objectMapper = new ObjectMapper();
-        String appPath = System.getProperty("user.dir");
-        File dataDir = new File(appPath + "/data");
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+
+        if (dataFilePath == null || dataFilePath.isBlank()) {
+            log.warn("Data path is not set, using default path for local: /data");
+            dataFilePath = System.getProperty("user.dir") + "/data";
+        }
+
+        File dataDir = new File(dataFilePath);
         if (!dataDir.exists()) {
             if (dataDir.mkdirs()) {
-                log.info("Создана директория для данных: {}", dataDir.getAbsolutePath());
+                log.info("Created data directory: {}", dataDir.getAbsolutePath());
             } else {
-                log.error("Не удалось создать директорию: {}", dataDir.getAbsolutePath());
-                throw new RuntimeException("Не удалось создать директорию для данных");
+                log.error("Failed to create directory: {}", dataDir.getAbsolutePath());
+                throw new RuntimeException("Failed to create data directory");
             }
         }
 
-        // Устанавливаем полный путь к файлу
-        this.dataFilePath = appPath + "/data/wedding_data.json";
+        this.dataFilePath += "/wedding_data.json";
         createFileIfNotExists();
         log.info("JsonFileService initialized with path: {}", dataFilePath);
     }
-
 
     private void createFileIfNotExists() {
         try {
@@ -77,5 +88,4 @@ public class JsonFileService {
             throw new RuntimeException("Failed to save data to JSON file", e);
         }
     }
-
 }

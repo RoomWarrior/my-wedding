@@ -13,12 +13,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/images/**", "/css/**", "/js/**"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers(
+                        "/images/**",
+                        "/css/**",
+                        "/js/**",
+                        "/guests/init-new"
+                ))
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()
                 );
 
         return http.build();
     }
+
 }
 

@@ -6,9 +6,7 @@ import dev.roomwarrior.wedding.model.GuestSummaryInfo;
 import dev.roomwarrior.wedding.service.GuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,10 @@ public class GuestsInfoRestController {
     @GetMapping("/summary")
     public ResponseEntity<GuestSummaryInfo> getGuestsSummaryInfo() {
         return ResponseEntity.ok(guestService.guestSummaryInfo());
+    }
+
+    @PostMapping("/init-new")
+    public void initNewGuests(@RequestBody List<GuestModel> guestsModels) {
+        guestService.initNewGuests(guestsModels);
     }
 }

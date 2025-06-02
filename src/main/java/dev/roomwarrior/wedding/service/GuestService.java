@@ -35,6 +35,29 @@ public class GuestService {
         jsonFileService.saveData(guests);
     }
 
+    public synchronized void initNewGuests(List<GuestModel> guestsModels) {
+        List<GuestModel> guests = getAllGuests();
+        long maxId = guests.stream()
+                .mapToLong(GuestModel::getId)
+                .max()
+                .orElse(0L);
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN));
+
+        List<GuestModel> validGuests = new ArrayList<>();
+
+        for (GuestModel guest : guestsModels) {
+            if (guest.getName() != null && guest.getAttending() != null && guest.getRelationType() != null) {
+                guest.setId(++maxId);
+                guest.setCts(timestamp);
+                validGuests.add(guest);
+            }
+        }
+
+        guests.addAll(validGuests);
+        jsonFileService.saveData(guests);
+    }
+
     private void initializeNewGuest(GuestModel guest, List<GuestModel> guests) {
         Long newId = guests.stream()
                 .mapToLong(GuestModel::getId)
