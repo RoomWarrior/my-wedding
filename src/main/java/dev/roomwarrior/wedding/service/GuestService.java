@@ -30,7 +30,7 @@ public class GuestService {
             initializeNewGuest(guest, guests);
         }
 
-        guests.removeIf(existingGuest -> hasSameName(guest, existingGuest));
+        guests.removeIf(existingGuest -> hasSameName(guest, existingGuest) || existingGuest.getName() == null);
         guests.add(guest);
         jsonFileService.saveData(guests);
     }

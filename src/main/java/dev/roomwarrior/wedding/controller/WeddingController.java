@@ -3,6 +3,7 @@ package dev.roomwarrior.wedding.controller;
 import dev.roomwarrior.wedding.enums.AttendingEnum;
 import dev.roomwarrior.wedding.model.GuestModel;
 import dev.roomwarrior.wedding.service.GuestService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class WeddingController {
     }
 
     @PostMapping("/rsvp")
-    public String rsvp(GuestModel guestModel, RedirectAttributes redirectAttributes) {
+    public String rsvp(@Valid GuestModel guestModel, RedirectAttributes redirectAttributes) {
         guestService.saveGuest(guestModel);
         redirectAttributes.addFlashAttribute("success", true);
         redirectAttributes.addFlashAttribute("guest", guestModel);
