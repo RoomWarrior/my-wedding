@@ -129,6 +129,10 @@ public class GuestService {
             GuestResponseModel response = guest.toResponseModel();
             AttendingEnum attending = guest.getAttending();
 
+            if (attending == null) {
+                continue;
+            }
+
             if (attending == AttendingEnum.NO) {
                 notAttending.add(response);
                 continue;
