@@ -2,6 +2,7 @@ package dev.roomwarrior.wedding.config;
 
 import dev.roomwarrior.wedding.interceptor.ApiKeyInterceptor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -15,5 +16,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(apiKeyInterceptor);
+    }
+
+    @Bean
+    public RequestRateLimitFilter requestRateLimitFilter() {
+        return new RequestRateLimitFilter();
     }
 } 
