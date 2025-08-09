@@ -2,7 +2,7 @@ package dev.roomwarrior.wedding;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+// REG ENDED
 @SpringBootApplication
 public class WeddingApplication {
 
