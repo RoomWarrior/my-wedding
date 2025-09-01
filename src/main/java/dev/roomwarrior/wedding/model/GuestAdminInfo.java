@@ -1,8 +1,10 @@
 package dev.roomwarrior.wedding.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dev.roomwarrior.wedding.enums.AttendingEnum;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
 public class GuestAdminInfo {
 
     private int totalGuests;
+    private int totalSize;
     private int attendingGuests;
     private List<GuestIncludeModel> guests;
 }

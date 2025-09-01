@@ -103,6 +103,7 @@ public class GuestService {
         return GuestAdminInfo.builder()
                 .totalGuests(statistics.getTotalGuests())
                 .attendingGuests(statistics.getAttendingCount())
+                .totalSize(guests.size())
                 .guests(filteredGuests.stream().map(item ->
                                 GuestIncludeModel.builder()
                                         .id(item.getId())

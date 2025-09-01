@@ -233,6 +233,10 @@
 				</form>
 			</div>
 
+			<div class="mt-3 mb-3">
+				<small class="text-muted">Отображено: <span th:text="${#lists.size(guests)}">0</span> из <span th:text="${totalSize}">0</span> записей</small>
+			</div>
+
 			<!-- Таблица гостей (десктоп) -->
 			<div class="table-container">
 				<div class="table-responsive">
@@ -303,9 +307,7 @@
 				</div>
 			</div>
 
-			<div class="mt-3">
-				<small class="text-muted">Отображено: <span th:text="${#lists.size(guests)}">0</span> из <span th:text="${totalVoted}">0</span> записей</small>
-			</div>
+
 		</div>
 	</div>
 </div>

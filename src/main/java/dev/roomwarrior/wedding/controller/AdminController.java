@@ -31,6 +31,7 @@ public class AdminController {
 
         model.addAttribute("guests", guestStat.getGuests());
         model.addAttribute("totalVoted", guestStat.getTotalGuests());
+        model.addAttribute("totalSize", guestStat.getTotalSize());
         model.addAttribute("willCome", guestStat.getAttendingGuests());
         model.addAttribute("search", search);
         model.addAttribute("selectedAttending", attending);
