@@ -10,12 +10,12 @@
     <link href="/css/styles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400..700&family=Marck+Script&display=swap&family=Neucha&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <!--<div class="wedding-header">-->
+<div class="main">
 	<div class="flex items-center justify-center">
 		<div class="relative animate-on-scroll">
 			<div class="video-section">
@@ -34,61 +34,77 @@
 				</div>
 			</div>
 			<div class="scroll-down-wrapper">
-				<button id="scrollDownBtn" class="scroll-down-btn" aria-label="Прокрутить вниз">⬇</button>
+				<button id="scrollDownBtn" class="scroll-down-btn" aria-label="Прокрутить вниз">
+                        <img style="width: 40px; transform: rotate(90deg);" src="/images/arrow.svg" alt="Вниз">
+                </button>
 			</div>
 		</div>
 	</div>
 <!--</div>-->
+    <div class="wedding-header">
+            <div class="wedding-details animate-on-scroll">
+                <h2 class="lead">Дорогие друзья и родные!</h2>
+                <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни и жизни наших детей.</p>
+                <p>Это будет особенный праздник, наполненный любовью, радостью и счастьем, а каждый из вас - важная его
+                    часть.</p>
+                <p>Пусть этот день запомнится теплом, яркими моментами и смехом</p>
+            </div>
+        <div class="wedding-details animate-on-scroll">
+            <h2 class="lead">Мы будем ждать вас</h2>
+            <p>21 сентября 2025 года</p>
+            <a class="btn-action" href="https://2gis.kg/bishkek/firm/70000001079683718?m=74.67647%2C42.680937%2F16" target="_blank">Ресторан UNO</a>
+        </div>
+    </div>
 
-
-<div class="animate-on-scroll">
-    <div class="container-rsvp">
-        <div class="rsvp-form" id="rsvpFormContainer">
-            <h2 class="text-center mb-4">Анкета</h2>
-            <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
-                <div class="mb-4">
-                    <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="name" th:field="*{name}"
-                           required>
-                    <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
-                        фамилию русскими буквами (например: Иван Петров)
+    <div class="animate-on-scroll">
+        <div class="container-rsvp">
+            <div class="rsvp-form" id="rsvpFormContainer">
+                <h2 class="text-center mb-4">Анкета</h2>
+                <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
+                    <div class="mb-4">
+                        <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}"
+                               required>
+                        <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
+                            фамилию русскими буквами (например: Иван Петров)
+                        </div>
                     </div>
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Выберите вариант <span class="text-danger">*</span></label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="attending" id="attendingYes"
-                               th:field="*{attending}" th:value="YES" required>
-                        <label class="form-check-label" for="attendingYes">
-                            Я приду
-                        </label>
+                    <div class="mb-4">
+                        <label class="form-label">Выберите вариант <span class="text-danger">*</span></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="attending" id="attendingYes"
+                                   th:field="*{attending}" th:value="YES" required>
+                            <label class="form-check-label" for="attendingYes">
+                                Я приду
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="attending" id="attendingPlusOne"
+                                   th:field="*{attending}" th:value="PLUS_ONE" required>
+                            <label class="form-check-label" for="attendingPlusOne">
+                                Я приду со второй половинкой
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="attending" id="attendingNo"
+                                   th:field="*{attending}" th:value="NO" required>
+                            <label class="form-check-label" for="attendingNo">
+                                К сожалению, не смогу прийти
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="attending" id="attendingPlusOne"
-                               th:field="*{attending}" th:value="PLUS_ONE" required>
-                        <label class="form-check-label" for="attendingPlusOne">
-                            Я приду со второй половинкой
-                        </label>
+                    <div class="mb-4" id="plusOneNameDiv" style="display: none;">
+                        <label for="plusOneName" class="form-label">Имя и фамилия вашей второй половинки<span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
+                        <div class="invalid-feedback" id="plusOneNameError" style="display: none;">Напишите, пожалуйста, имя
+                            и
+                            фамилию вашей второй половинки русскими буквами (например: Иван Петров)
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="attending" id="attendingNo"
-                               th:field="*{attending}" th:value="NO" required>
-                        <label class="form-check-label" for="attendingNo">
-                            К сожалению, не смогу прийти
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-4" id="plusOneNameDiv" style="display: none;">
-                    <label for="plusOneName" class="form-label">Имя и фамилия вашей второй половинки<span
-                            class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="plusOneName" th:field="*{plusOneName}">
-                    <div class="invalid-feedback" id="plusOneNameError" style="display: none;">Напишите, пожалуйста, имя
-                        и
-                        фамилию вашей второй половинки русскими буквами (например: Иван Петров)
-                    </div>
-                </div>
-                <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
-            </form>
+                    <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -103,7 +119,7 @@
 <!--    </div>-->
 <!--</div>-->
 <footer class="wedding-footer text-center mt-5 mb-3 animate-on-scroll">
-    <p class="mb-2" style="font-size: 1.2rem; font-weight: 100">
+    <p class="mb-2" style="font-size: 1.2rem; font-weight: 100; color: var(--mountain-blue);">
         Сделано с любовью, для Бека и Элнуры 💍
     </p>
     <p style="font-size: 0.9rem;">© 2025 Все права защищены</p>

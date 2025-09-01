@@ -1,25 +1,29 @@
 :root {
     /*--primary-color: #2C3E50;  !* Глубокий синий гор *!*/
-    --accent-color: #e8cfcf; /* Теплый оранжевый заката */
-    --text-color: #3e3a3b; /* Темно-red текст */
+    --accent-color: #f1efed; /* Теплый оранжевый заката */
+    --text-color: #1e2124; /* Темно-red текст */
     --light-bg: #f3e8dc; /* Светлый фон */
     --nature-green: #445439; /* Зеленый лес */
     /*--soft-green: #9ead5c;     !* Светлый зеленый *!*/
-    --mountain-blue: #6b010e; /* Синий неба */
+    --mountain-blue: #66774d; /* Синий неба */
     --rock-brown: #a46c57; /* Серый скал */
-    --sunset-orange: #cd5222; /* Оранжевый заката */
+    --sunset-orange: #FFFF; /* Оранжевый заката */
     --light-bg-purple: #d4c0b9; /* Фиолетовый горных вершин */
 }
 
 body {
     /*background: linear-gradient(135deg, #e0dbdc 0%, #f0e5d0 50%, #f6f5f4 100%);*/
     /*background: #f6f5f4;*/
-    background: #f0e5d0;
-    font-family: 'Neucha', cursive;
-    color: var(--text-color);
+    background: #f1efed;
+    font-family: 'Playfair Display', cursive;
+    color: var(--accent-color);
     line-height: 1.6;
     font-size: 1.3rem;
     min-height: 100vh;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: var(--sunset-orange) !important;
 }
 
 .wedding-header {
@@ -28,7 +32,7 @@ body {
 
 
 .lead {
-    font-family: "Caveat", cursive;
+    font-family: "Playfair Display", cursive;
     font-size: 2rem;
     color: var(--mountain-blue);
     font-weight: 500;
@@ -44,6 +48,7 @@ body {
 }
 
 .wedding-details {
+    text-align: center;
     background: rgba(255, 255, 255, 0.9);
     padding: 1.5rem;
     border-radius: 15px;
@@ -85,12 +90,13 @@ p {
 .rsvp-form {
     z-index: 10;
     max-width: 600px;
+    height: 100%;
     margin: 0 auto;
     padding: 30px 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
+    background: var(--mountain-blue);
+    /* border-radius: 20px; */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+    /* position: relative; */
     overflow: hidden;
 }
 
@@ -105,8 +111,8 @@ p {
 }
 
 .rsvp-form h2 {
-    font-family: 'Caveatt', serif;
-    color: var(--mountain-blue);
+    font-family: 'Playfair Display', serif;
+    color: var(--accent-color);
     margin-bottom: 1.5rem;
     font-weight: 500;
     font-size: 2rem;
@@ -114,7 +120,7 @@ p {
 
 .form-label {
     font-weight: 500;
-    color: var(--text-color);
+    color: var(--accent-color);
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
 }
@@ -134,11 +140,11 @@ p {
 
 .form-check-input:checked {
     background-color: var(--mountain-blue);
-    border-color: var(--mountain-blue);
+    border-color: var(--accent-color);
 }
 
 .btn-primary {
-    background: var(--mountain-blue);
+    /*background: var(--mountain-blue);*/
     border: none;
     padding: 15px;
     /*font-weight: 500;*/
@@ -255,6 +261,7 @@ textarea.form-control {
 }
 
 .modal-content {
+    color: var(--text-color);
     margin: 15% auto;
     font-family: sans-serif;
     font-size: 1.2em;
@@ -371,9 +378,9 @@ textarea.form-control {
 }
 
 .btn-action {
-    background: var(--mountain-blue);
-    color: white;
-    border: none;
+    /*background: var(--mountain-blue);*/
+    color: var(--mountain-blue);
+    border: 1px solid var(--mountain-blue);
     padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
@@ -382,7 +389,7 @@ textarea.form-control {
 
 .btn-action:hover {
     transform: scale(1.02); /* чуть больше 1 */
-    color: white;
+    /*color: white;*/
 }
 
 .wedding-bottom {
@@ -412,6 +419,11 @@ h3 {
     }
 }
 
+.container-rsvp {
+    background: var(--mountain-blue);
+    height: 100%;
+}
+
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 768px) {
 
@@ -424,11 +436,11 @@ h3 {
     }
 
     .container-rsvp {
-        margin: 0 15px;
+        /*margin: 0 15px;*/
     }
 
     .wedding-header {
-        padding: 40px 15px 0 15px;
+        padding: 0 15px 0 15px;
     }
 
     .wedding-header p {
@@ -562,56 +574,93 @@ h3 {
 }
 
 
-.video-section {
-    height: 90vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    margin-top: 5vh;
-    margin-bottom: 1vh;
+/*.video-section {*/
+/*    height: 100vh;*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    overflow: hidden;*/
+/*    !*position: relative;*!*/
+/*    !*margin-top: 5vh;*!*/
+/*    !*margin-bottom: 1vh;*!*/
+/*}*/
+
+/*.video-container {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    max-width: 500px;*/
+/*    margin: 0;*/
+/*    overflow: hidden;*/
+/*}*/
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
-.video-container {
-    height: 100%;
-    width: 100%;
-    max-width: 500px;
-    margin: 0;
-    overflow: hidden;
-    position: relative;
-    border-radius: 15px;
+/*.featured-video {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover; !* Покрывает всю область, сохраняя пропорции *!*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+@media (max-width: 1024px) {
+    .video-section {
+        width: 100%;
+    }
+
+    .video-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .featured-video {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 }
 
-.featured-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Покрывает всю область, сохраняя пропорции */
-    position: absolute;
-    top: 0;
-    left: 0;
+@media (min-width: 1025px) {
+    .video-section {
+    }
+
+    .video-container {
+    }
+    .featured-video {
+        height: 100vh;   /* видео во всю высоту экрана */
+        width: auto;     /* ширина сама подстраивается */
+        max-width: 100%; /* чтобы не вылазило за экран */
+        display: block;
+        margin: 0 auto;  /* центрируем по горизонтали */
+    }
 }
+
+
 
 /* Для устройств с маленькой высотой экрана корректируем минимальную высоту */
-@media (max-height: 500px) {
-    .video-section {
-        min-height: 450px;
-    }
+/*@media (max-height: 500px) {*/
+/*    .video-section {*/
+/*        min-height: 450px;*/
+/*    }*/
 
-}
+/*}*/
 
-@media (max-width: 500px) {
-    .video-container {
-        max-width: 400px;
-    }
-}
+/*@media (max-width: 500px) {*/
+/*    .video-container {*/
+/*        max-width: 400px;*/
+/*    }*/
+/*}*/
 
 
 .custom-controls {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    top: 1%;
+    right: 33%;
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
@@ -671,23 +720,36 @@ h3 {
 }
 
 /* Скрываем элементы управления на маленьких экранах при неактивности */
-@media (max-width: 768px) {
-    .custom-controls {
-        opacity: 0;
-    }
+/*@media (max-width: 768px) {*/
+/*    .custom-controls {*/
+/*        opacity: 0;*/
+/*    }*/
 
-    .video-container:hover .custom-controls {
-        opacity: 0.7;
-    }
+/*    .video-container:hover .custom-controls {*/
+/*        opacity: 0.7;*/
+/*    }*/
+/*}*/
+
+.invalid-feedback {
+    color: var(--sunset-orange);
 }
 
 .scroll-down-wrapper {
+    position: absolute;
+    bottom: 1%;
+    right: 33%;
+    width: 33%;
+    opacity: 0;                   /* изначально скрыт */
+    animation: fadeIn 1s forwards; /* анимация появления */
+    animation-delay: 10s;          /* задержка 10 секунд */
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
 
 .scroll-down-btn {
+    height: 50px;
+    width: 50px;
     background: transparent;
     border: none;
     font-size: 2rem;
