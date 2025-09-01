@@ -199,4 +199,8 @@ public class GuestService {
 
         return new GuestStatistics(attendingCount, needTransportCount, notAttending);
     }
+
+    public synchronized void clearAllGuests() {
+        jsonFileService.saveData(new ArrayList<GuestModel>());
+    }
 }

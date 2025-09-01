@@ -32,4 +32,10 @@ public class GuestsInfoRestController {
     public void initNewGuests(@RequestBody List<GuestModel> guestsModels) {
         guestService.initNewGuests(guestsModels);
     }
+
+    @DeleteMapping("/clear")
+    public ResponseEntity<Void> clearAllGuests() {
+        guestService.clearAllGuests();
+        return ResponseEntity.ok().build();
+    }
 }
