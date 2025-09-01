@@ -17,7 +17,7 @@ public class WeddingController {
 
     private final GuestService guestService;
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String home(Model model) {
         if (!model.containsAttribute("guestModel")) {
             model.addAttribute("guestModel", GuestModel.builder()
@@ -32,6 +32,6 @@ public class WeddingController {
         guestService.saveGuest(guestModel);
         redirectAttributes.addFlashAttribute("success", true);
         redirectAttributes.addFlashAttribute("guest", guestModel);
-        return "redirect:/";
+        return "redirect:/home";
     }
 }

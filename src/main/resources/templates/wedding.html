@@ -15,81 +15,36 @@
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-<div class="wedding-header">
-    <div class="flex items-center justify-center">
-        <div class="relative animate-on-scroll">
-            <div class="photo-wrapper">
-                <img class="image" alt="we" src="/images/img.webp">
-            </div>
-        </div>
-    </div>
-    <h1 class="animate-on-scroll">Мы - Артур и Карина</h1>
-    <h3 class="animate-on-scroll">решили пожениться и позвать именно вас!</h3>
-    <div class="wedding-details animate-on-scroll">
-        <h2 class="lead">Дорогие друзья!</h2>
-        <p>Мы рады пригласить вас разделить с нами самый важный день в нашей жизни.</p>
-        <p>Это будет особенный праздник, наполненный любовью, радостью и счастьем, а каждый из вас - важная его
-            часть.</p>
-        <p>Пусть этот день запомнится теплом, яркими моментами и смехом</p>
-    </div>
-    <div class="wedding-details animate-on-scroll">
-        <h2 class="lead">Программа торжества</h2>
-        <div class="timeline">
-            <div class="timeline-item animate-on-scroll">
-                <img src="/images/champagne.svg" alt="Церемония">
-                <div class="time">15:00</div>
-                <div class="event">Сбор гостей, фуршет</div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <img src="/images/arch.svg" alt="Церемония">
-                <div class="time">16:00</div>
-                <div class="event">Церемония</div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <img src="/images/cake.svg" alt="Банкет">
-                <div class="time">17:00</div>
-                <div class="event">Праздничный банкет</div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <img src="/images/saxophone.svg" alt="After party">
-                <div class="time">18:00</div>
-                <div class="event">Музыка, танцы, веселье!</div>
-            </div>
-        </div>
-    </div>
-    <div class="wedding-details animate-on-scroll">
-        <h2 class="lead">Мы будем ждать вас</h2>
-        <p>16 августа 2025 года</p>
-        <a href="https://2gis.kg/bishkek/firm/70000001079683718?m=74.67647%2C42.680937%2F16" target="_blank">Mountain
-            View Resort</a>
-        <h2 class="lead">Дресс-код</h2>
-        <p>Мы будем очень рады, если вы поддержите нас вашими улыбками и объятиями, а также красивыми нарядами в палитре
-            торжества</p>
+<!--<div class="wedding-header">-->
+	<div class="flex items-center justify-center">
+		<div class="relative animate-on-scroll">
+			<div class="video-section">
+				<div class="video-container">
+					<video class="featured-video" autoplay muted loop>
+						<source src="/videos/invitation.mp4" type="video/mp4">
+						Ваш браузер не поддерживает воспроизведение видео.
+					</video>
+					<div class="custom-controls">
+						<button class="sound-toggle" id="soundToggle">
+							<i class="sound-off-icon">🔇</i>
+							<i class="sound-on-icon" style="display:none">🔊</i>
+						</button>
+						<input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0">
+					</div>
+				</div>
+			</div>
+			<div class="scroll-down-wrapper">
+				<button id="scrollDownBtn" class="scroll-down-btn" aria-label="Прокрутить вниз">⬇</button>
+			</div>
+		</div>
+	</div>
+<!--</div>-->
 
-        <div class="color-palette">
-            <div class="color-swatch" style="background-color: #809671;"></div>
-            <div class="color-swatch" style="background-color: #B3B792;"></div>
-            <div class="color-swatch" style="background-color: #E5E0D8;"></div>
-            <div class="color-swatch" style="background-color: #E5D2B8;"></div>
-            <div class="color-swatch" style="background-color: #D2AB80;"></div>
-            <div class="color-swatch" style="background-color: #725C3A;"></div>
-        </div>
-    </div>
-</div>
+
 <div class="animate-on-scroll">
-    <div class="flex items-center justify-center images-wrapper">
-        <div class="parent-wrapper">
-            <div class="photo-wrapper-both img-1">
-                <img class="image" alt="we" src="/images/img_1.webp">
-            </div>
-            <div class="photo-wrapper-both img-2">
-                <img class="image" alt="we" src="/images/img_2.webp">
-            </div>
-        </div>
-    </div>
     <div class="container-rsvp">
         <div class="rsvp-form" id="rsvpFormContainer">
-            <h2 class="text-center mb-4">RSVP</h2>
+            <h2 class="text-center mb-4">Анкета</h2>
             <form th:action="@{/rsvp}" th:object="${guestModel}" method="post" id="rsvpForm">
                 <div class="mb-4">
                     <label for="name" class="form-label">Ваше имя и фамилия <span class="text-danger">*</span></label>
@@ -98,18 +53,6 @@
                     <div class="invalid-feedback" id="nameError" style="display: none;">Напишите, пожалуйста, ваши имя и
                         фамилию русскими буквами (например: Иван Петров)
                     </div>
-                </div>
-                <div class="mb-4">
-                    <label for="relationType" class="form-label">Кем вы приходитесь молодоженам? <span
-                            class="text-danger">*</span></label>
-                    <select class="form-control" id="relationType" name="relationType" required>
-                        <option value="" disabled selected>Выберите</option>
-                        <option th:each="type : ${T(dev.roomwarrior.wedding.enums.RelationType).values()}"
-                                th:value="${type}"
-                                th:text="${type.displayName}"
-                                th:selected="${guestModel.relationType == type}">Тип отношений
-                        </option>
-                    </select>
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Выберите вариант <span class="text-danger">*</span></label>
@@ -144,46 +87,24 @@
                         фамилию вашей второй половинки русскими буквами (например: Иван Петров)
                     </div>
                 </div>
-                <div class="mb-4" id="transportDiv" style="display: none;">
-                    <label class="form-label">Как вы планируете добраться? <span class="text-danger">*</span></label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="needsTransport" id="transportNo"
-                               th:field="*{needsTransport}" th:value="false" required>
-                        <label class="form-check-label" for="transportNo">
-                            Доберусь своим ходом
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="needsTransport" id="transportYes"
-                               th:field="*{needsTransport}" th:value="true" required>
-                        <label class="form-check-label" for="transportYes">
-                            Нашим трансфером
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="message" class="form-label">Сообщение для молодоженов </label>
-                    <textarea style="resize: none;" class="form-control" id="message" th:field="*{message}"
-                              rows="3"></textarea>
-                </div>
                 <button type="submit" class="btn-action btn-primary w-100" id="submitButton">Отправить</button>
             </form>
         </div>
     </div>
 </div>
-<div class="wedding-bottom">
-    <div class="wedding-details animate-on-scroll">
-        <h2 class="lead">Кстати</h2>
-        <p>Мы любим <span style="color: #809671">ДЕНЬГИ</span> и не любим цветы, но если вы хотите сделать нам приятно, то <span
-                style="color: var(--mountain-blue)">ВМЕСТО</span> цветов, мы будем очень рады чему-нибудь из нашего вишлиста</p>
-        <a target="_blank" href="https://followish.io/mywishlist/gulc04s3lbwbmt">
-            <button class="btn-action">Вишлист</button>
-        </a>
-    </div>
-</div>
+<!--<div class="wedding-bottom">-->
+<!--    <div class="wedding-details animate-on-scroll">-->
+<!--        <h2 class="lead">Кстати</h2>-->
+<!--        <p>Мы любим <span style="color: #809671">ДЕНЬГИ</span> и не любим цветы, но если вы хотите сделать нам приятно, то <span-->
+<!--                style="color: var(&#45;&#45;mountain-blue)">ВМЕСТО</span> цветов, мы будем очень рады чему-нибудь из нашего вишлиста</p>-->
+<!--        <a target="_blank" href="https://followish.io/mywishlist/gulc04s3lbwbmt">-->
+<!--            <button class="btn-action">Вишлист</button>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
 <footer class="wedding-footer text-center mt-5 mb-3 animate-on-scroll">
     <p class="mb-2" style="font-size: 1.2rem; font-weight: 100">
-        Сделано с любовью, Артуром и Кариной 💍
+        Сделано с любовью, для Бека и Элнуры 💍
     </p>
     <p style="font-size: 0.9rem;">© 2025 Все права защищены</p>
 
@@ -193,6 +114,51 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function () {
+        const video = document.querySelector('.featured-video');
+        const soundToggle = document.getElementById('soundToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const soundOffIcon = document.querySelector('.sound-off-icon');
+        const soundOnIcon = document.querySelector('.sound-on-icon');
+
+        // Обработчик для кнопки включения/выключения звука
+        soundToggle.addEventListener('click', function() {
+            if (video.muted) {
+                video.muted = false;
+                soundOffIcon.style.display = 'none';
+                soundOnIcon.style.display = 'inline';
+                volumeSlider.value = video.volume;
+            } else {
+                video.muted = true;
+                soundOffIcon.style.display = 'inline';
+                soundOnIcon.style.display = 'none';
+                volumeSlider.value = 0;
+            }
+        });
+
+        // Обработчик для слайдера громкости
+        volumeSlider.addEventListener('input', function() {
+            video.volume = this.value;
+            if (this.value > 0) {
+                video.muted = false;
+                soundOffIcon.style.display = 'none';
+                soundOnIcon.style.display = 'inline';
+            } else {
+                soundOffIcon.style.display = 'inline';
+                soundOnIcon.style.display = 'none';
+            }
+        });
+
+        // Устанавливаем начальное состояние
+        if (video.muted) {
+            soundOffIcon.style.display = 'inline';
+            soundOnIcon.style.display = 'none';
+            volumeSlider.value = 0;
+        } else {
+            soundOffIcon.style.display = 'none';
+            soundOnIcon.style.display = 'inline';
+            volumeSlider.value = video.volume;
+        }
+
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -207,14 +173,24 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
-    });
 
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        const scrollDownBtn = document.getElementById('scrollDownBtn');
+        if (scrollDownBtn) {
+            scrollDownBtn.addEventListener('click', () => {
+                document.getElementById('rsvpFormContainer')?.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    });
 
     const attendingPlusOne = document.getElementById('attendingPlusOne');
     const attendingYes = document.getElementById('attendingYes');
     const attendingNo = document.getElementById('attendingNo');
     const plusOneNameDiv = document.getElementById('plusOneNameDiv');
-    const transportDiv = document.getElementById('transportDiv');
     const plusOneNameInput = document.getElementById('plusOneName');
     const form = document.getElementById('rsvpForm');
     const submitButton = document.getElementById('submitButton');
@@ -264,7 +240,7 @@
 
 
     function updateFormFields() {
-        const isAttending = attendingYes.checked || attendingPlusOne.checked;
+        console.log('updateFormFields called')
 
         // Показываем/скрываем поле для имени +1
         if (attendingPlusOne.checked) {
@@ -278,19 +254,6 @@
             }
         }
 
-        // Показываем/скрываем выбор транспорта
-        if (isAttending) {
-            transportDiv.style.display = 'block';
-            document.querySelectorAll('input[name="needsTransport"]').forEach(radio => {
-                radio.setAttribute('required', 'required');
-            });
-        } else {
-            transportDiv.style.display = 'none';
-            document.querySelectorAll('input[name="needsTransport"]').forEach(radio => {
-                radio.removeAttribute('required');
-                radio.checked = false;
-            });
-        }
     }
 
     // Валидация формы
@@ -310,11 +273,6 @@
             return;
         }
 
-        const isAttending = attendingYes.checked || attendingPlusOne.checked;
-        if (isAttending && !document.querySelector('input[name="needsTransport"]:checked')) {
-            alert('Пожалуйста, выберите способ транспорта');
-            return;
-        }
 
         submitButton.disabled = true;
 

@@ -2,15 +2,14 @@ package dev.roomwarrior.wedding.service;
 
 import dev.roomwarrior.wedding.enums.AttendingEnum;
 import dev.roomwarrior.wedding.enums.RelationType;
-import dev.roomwarrior.wedding.model.GuestModel;
-import dev.roomwarrior.wedding.model.GuestResponseModel;
-import dev.roomwarrior.wedding.model.GuestSummaryInfo;
+import dev.roomwarrior.wedding.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,6 +21,7 @@ public class GuestService {
     private final JsonFileService jsonFileService;
 
     private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final ZoneId APP_ZONE = ZoneId.of("UTC+06:00");
 
     public synchronized void saveGuest(GuestModel guest) {
         List<GuestModel> guests = getAllGuests();
@@ -42,7 +42,7 @@ public class GuestService {
                 .max()
                 .orElse(0L);
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN));
+        String timestamp = LocalDateTime.now(APP_ZONE).format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN));
 
         List<GuestModel> validGuests = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class GuestService {
                 .max()
                 .orElse(0L) + 1;
         guest.setId(newId);
-        guest.setCts(LocalDateTime.now().format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN)));
+        guest.setCts(LocalDateTime.now(APP_ZONE).format(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN)));
     }
 
     private boolean hasSameName(GuestModel newGuest, GuestModel existingGuest) {
@@ -87,6 +87,33 @@ public class GuestService {
 
     public List<GuestModel> getAllGuests() {
         return jsonFileService.loadData(GuestModel.class);
+    }
+
+    public GuestAdminInfo guestAdminInfo(String search, AttendingEnum attending) {
+        List<GuestModel> guests = getAllGuests();
+        GuestStatistics statistics = calculateGuestStatistics(guests);
+
+        List<GuestModel> filteredGuests = guests.stream()
+                .filter(guest -> search == null || search.isEmpty() ||
+                        guest.getName().toLowerCase().contains(search.toLowerCase()) ||
+                        (guest.getPlusOneName() != null && guest.getPlusOneName().toLowerCase().contains(search.toLowerCase())))
+                .filter(guest -> attending == null || guest.getAttending() == attending)
+                .toList();
+
+        return GuestAdminInfo.builder()
+                .totalGuests(statistics.getTotalGuests())
+                .attendingGuests(statistics.getAttendingCount())
+                .guests(filteredGuests.stream().map(item ->
+                                GuestIncludeModel.builder()
+                                        .id(item.getId())
+                                        .name(item.getName())
+                                        .cts(item.getCts())
+                                        .attending(item.getAttending())
+                                        .plusOneName(item.getPlusOneName())
+                                        .build())
+                        .collect(Collectors.toList()))
+                .build();
+
     }
 
     public GuestSummaryInfo guestSummaryInfo() {

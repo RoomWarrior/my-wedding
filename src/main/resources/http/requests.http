@@ -13,3 +13,7 @@ X-API-Key: {{apiKey}}
 ### guests summary
 GET https://my-wedding-jnur.onrender.com/guests/summary
 X-API-Key: {{apiKey}}
+
+###
+POST http://localhost:8080/rsvp
+Content-Type: application/x-www-form-urlencoded
