@@ -14,6 +14,395 @@ X-API-Key: {{apiKey}}
 GET https://my-wedding-jnur.onrender.com/guests/summary
 X-API-Key: {{apiKey}}
 
+### init new
+POST https://my-wedding-jnur.onrender.com/guests/init-new
+X-API-Key: {{apiKey}}
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "name": "Касымжапаров Адилет",
+    "attending": "PLUS_ONE",
+    "message": "",
+    "plusOneName": "Даирова Эрика",
+    "needsTransport": false,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 13:14:15"
+  },
+  {
+    "id": 2,
+    "name": "Меруерт Качкынбаева",
+    "attending": "YES",
+    "message": "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 13:20:18"
+  },
+  {
+    "id": 3,
+    "name": "Мээрим Эгизбаева",
+    "attending": "YES",
+    "message": "Счастья, любви и много денег",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 13:57:04"
+  },
+  {
+    "id": 4,
+    "name": "Никулина Малика",
+    "attending": "PLUS_ONE",
+    "message": "",
+    "plusOneName": "Никулин Александр ",
+    "needsTransport": false,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-01 14:51:38"
+  },
+  {
+    "id": 5,
+    "name": "Ладан Андрей",
+    "attending": "PLUS_ONE",
+    "message": "",
+    "plusOneName": "Ладан Валерия",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-01 14:53:37"
+  },
+  {
+    "id": 6,
+    "name": "Алла Юнусова",
+    "attending": "YES",
+    "message": "Я вас люблю 💘 ",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-01 15:06:44"
+  },
+  {
+    "id": 7,
+    "name": "Кунахунова Тахмина ",
+    "attending": "YES",
+    "message": "Поздравляю ",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-01 15:36:38"
+  },
+  {
+    "id": 8,
+    "name": "Арлен Жээнбеков",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 15:40:12"
+  },
+  {
+    "id": 9,
+    "name": "Асыл Сейтмырзаев",
+    "attending": "YES",
+    "message": "Бесконечной любви ",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 15:40:59"
+  },
+  {
+    "id": 10,
+    "name": "Влад Ромахов",
+    "attending": "PLUS_ONE",
+    "message": "Очень очень классно🙂 буду с нетерпением ждать вашей свадьбы 😉",
+    "plusOneName": "Татьяна Ромахова",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-01 15:42:42"
+  },
+  {
+    "id": 11,
+    "name": "Искакова Айдина",
+    "attending": "YES",
+    "message": "😘😘😘😘😘 ",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-01 15:49:08"
+  },
+  {
+    "id": 12,
+    "name": "Касмалиева Чолпонай ",
+    "attending": "PLUS_ONE",
+    "message": "Спасибо за приглашение 🥰будем рады разделить с вами этот день 🫶🏻",
+    "plusOneName": "Аскарбеков Мирбек ",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 15:54:36"
+  },
+  {
+    "id": 13,
+    "name": "Чынгыз Кайратбекович",
+    "attending": "YES",
+    "message": "👍👍👍",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 16:52:59"
+  },
+  {
+    "id": 14,
+    "name": "Медет Мусаев",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "FRIEND",
+    "cts": "2025-06-01 19:44:52"
+  },
+  {
+    "id": 16,
+    "name": "Аделя Ашиналиева",
+    "attending": "YES",
+    "message": "Не забудьте о том, что я несу кольца!!!",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-02 03:46:39"
+  },
+  {
+    "id": 17,
+    "name": "Когай Ляля Леонидовна",
+    "attending": "YES",
+    "message": "💐💐💐💐💐похдравляю ",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-02 05:14:05"
+  },
+  {
+    "id": 18,
+    "name": "Бакай Таалайбеков",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:26:21"
+  },
+  {
+    "id": 19,
+    "name": "Альфит Баширов",
+    "attending": "YES",
+    "message": "Артур, ты - хуйня :)",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:27:57"
+  },
+  {
+    "id": 20,
+    "name": "Искендер Копбаев",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:29:48"
+  },
+  {
+    "id": 21,
+    "name": "Сабыр Мусуралиев",
+    "attending": "PLUS_ONE",
+    "message": "Когда дети?",
+    "plusOneName": "Бегимай Ибраимова",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:32:58"
+  },
+  {
+    "id": 22,
+    "name": "Орхан Алиев",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:37:48"
+  },
+  {
+    "id": 23,
+    "name": "Кыдыралиев Азамат",
+    "attending": "PLUS_ONE",
+    "message": "Побольше детишек = )",
+    "plusOneName": "Айэлита Ишенова",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 05:37:58"
+  },
+  {
+    "id": 24,
+    "name": "Айдана Исакова ",
+    "attending": "YES",
+    "message": "А че вы не добавили раздел бести? 😂😭\r\nА по поводу трансфера с вами поеду, куда вы без меня 💅🏼",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "FRIEND",
+    "cts": "2025-06-02 06:01:04"
+  },
+  {
+    "id": 25,
+    "name": "Роман Антипов",
+    "attending": "YES",
+    "message": "https://sun9-30.userapi.com/impg/c841034/v841034207/58ecd/a0dr6Pw1MJ8.jpg?size=604x601&quality=96&sign=6262e8778c1b19310ebfc00deea720dc&type=album",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 07:13:33"
+  },
+  {
+    "id": 26,
+    "name": "Арген Мухамедали",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": true,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 08:21:14"
+  },
+  {
+    "id": 28,
+    "name": "тест тест",
+    "attending": "NO",
+    "message": "234521",
+    "plusOneName": "",
+    "needsTransport": null,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-02 08:25:46"
+  },
+  {
+    "id": 32,
+    "name": "Иван Петров",
+    "attending": "NO",
+    "message": "111",
+    "plusOneName": "",
+    "needsTransport": null,
+    "relationType": "RELATIVE",
+    "cts": "2025-06-02 08:33:41"
+  },
+  {
+    "id": 33,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:34:37"
+  },
+  {
+    "id": 34,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:35:01"
+  },
+  {
+    "id": 35,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:35:06"
+  },
+  {
+    "id": 36,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:35:11"
+  },
+  {
+    "id": 37,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:35:51"
+  },
+  {
+    "id": 38,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:36:00"
+  },
+  {
+    "id": 39,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:36:19"
+  },
+  {
+    "id": 41,
+    "name": null,
+    "attending": null,
+    "message": null,
+    "plusOneName": null,
+    "needsTransport": null,
+    "relationType": null,
+    "cts": "2025-06-02 08:37:50"
+  },
+  {
+    "id": 42,
+    "name": "Семен Иванов",
+    "attending": "NO",
+    "message": "Счастья",
+    "plusOneName": "",
+    "needsTransport": null,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 08:40:28"
+  },
+  {
+    "id": 43,
+    "name": "Семен Василиевич",
+    "attending": "NO",
+    "message": "Счастья",
+    "plusOneName": "",
+    "needsTransport": null,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 08:46:11"
+  },
+  {
+    "id": 44,
+    "name": "Нурлан Нурдинов",
+    "attending": "YES",
+    "message": "",
+    "plusOneName": "",
+    "needsTransport": false,
+    "relationType": "COLLEAGUE",
+    "cts": "2025-06-02 09:12:50"
+  }
+]
+
+
 ###
 POST http://localhost:8080/rsvp
 Content-Type: application/x-www-form-urlencoded

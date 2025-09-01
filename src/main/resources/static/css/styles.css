@@ -660,7 +660,7 @@ h3 {
 .custom-controls {
     position: absolute;
     top: 1%;
-    right: 33%;
+    left: 50%;
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);

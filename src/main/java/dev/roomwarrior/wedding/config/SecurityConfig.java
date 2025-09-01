@@ -31,7 +31,7 @@ public class SecurityConfig {
                         "/videos/**",
                         "/css/**",
                         "/js/**",
-                        "/guests/init-new"
+                        "/guests/**"
                 ))
                 .authorizeHttpRequests(auth -> auth
                         // Админка требует аутентификации

@@ -1,7 +1,6 @@
 package dev.roomwarrior.wedding.controller;
 
 import dev.roomwarrior.wedding.enums.AttendingEnum;
-import dev.roomwarrior.wedding.model.GuestModel;
 import dev.roomwarrior.wedding.service.GuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 
 @Controller
@@ -35,7 +33,7 @@ public class AdminController {
         model.addAttribute("willCome", guestStat.getAttendingGuests());
         model.addAttribute("search", search);
         model.addAttribute("selectedAttending", attending);
-        model.addAttribute("attendingOptions", AttendingEnum.values());
+        model.addAttribute("attendingOptions", Arrays.asList(AttendingEnum.YES, AttendingEnum.NO));
         return "admin";
     }
 }

@@ -97,7 +97,16 @@ public class GuestService {
                 .filter(guest -> search == null || search.isEmpty() ||
                         guest.getName().toLowerCase().contains(search.toLowerCase()) ||
                         (guest.getPlusOneName() != null && guest.getPlusOneName().toLowerCase().contains(search.toLowerCase())))
-                .filter(guest -> attending == null || guest.getAttending() == attending)
+                .filter(guest -> {
+                    if (attending == null) {
+                        return true;
+                    } else if (attending == AttendingEnum.YES) {
+                        return guest.getAttending() == AttendingEnum.YES ||
+                                guest.getAttending() == AttendingEnum.PLUS_ONE;
+                    } else {
+                        return guest.getAttending() == attending;
+                    }
+                })
                 .toList();
 
         return GuestAdminInfo.builder()
